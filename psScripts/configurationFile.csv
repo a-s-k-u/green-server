@@ -1,0 +1,6 @@
+URI,Location,Type
+ProjectFile,SoftwareCatalogue.ps,Project
+DataFolder,SoftwareData.csv,Data
+/home,home.html,Page
+/softwares/:id,getSoftware,GET
+/softwares,getSoftwares,GET
