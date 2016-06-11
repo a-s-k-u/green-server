@@ -15,12 +15,35 @@
  #*
  #*=============================================================================
 "Control reached powershell - setting up a local server/listener"
+#----------------------------------------------------------------
+$path=$args[0]
+#----------------------------------------------------------------
+"Checking for configuration file at path " + $path 
+$configFilePath = [io.path]::combine($path,'app.config')  # using .NET Path class instead of join-path commandlet for consistency.
+#----------------------------------------------------------------
+"Reading Configuration File " + $configFilePath
+$appConfig = Import-Csv -Path $configFilePath
+$Pages=@{}
+$APIs = @{}
+foreach($r in $appConfig)
+{
+    if ( $r.Type = 'Page')
+    {
+    $Pages[$r.URI]=$r.Location
+    }
+    if ( $r.Type = 'API')
+    {
+    $APIs[$r.URI]=$r.Location
+    }
+}
+#----------------------------------------------------------------
+
 $listener = New-Object Net.HttpListener
 $listener.Prefixes.Add("http://localhost:8081/")
 "Starting the local server at port 8081"
 $listener.Start()
 "Local server started and server listening to port 8081"
-$path=$args[0]
+
 "Opening the browser"
 Start-Process -FilePath "http://localhost:8081/home/"
 "Browser Opened with the url to local server"
