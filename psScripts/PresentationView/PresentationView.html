@@ -86,12 +86,18 @@
         app.factory('webServiceCall',['$http', function($http){
             var o = {
                 parties: [],
+                slides:[],
                 party: {}
             };
 
             o.getAll = function () {
-                return $http.get('/parties').success(function (data) {
+                return $http.get('/ideas').success(function (data) {
                     angular.copy(data, o.parties);
+                });
+            };
+            o.getSlides = function () {
+                return $http.get('/slides').success(function (data) {
+                    angular.copy(data, o.slides);
                 });
             };
             o.get = function (id) {
@@ -127,8 +133,9 @@
         'webServiceCall',
         function ($scope,$stateParams, webServiceCall) {
             //$scope.party = webServiceCall.party;
-            $scope.myInterval = 3000;
-              $scope.slides = [
+            webServiceCall.getSlides();
+            $scope.myInterval = 300000;
+              $scope.slides1 = [
                 {
                   image: 'http://lorempixel.com/400/500/'
                 },
@@ -142,6 +149,10 @@
                   image: 'http://lorempixel.com/400/200/people'
                 }
               ];
+              
+
+              $scope.ideas = webServiceCall.parties;
+              $scope.slides = webServiceCall.slides;
               $scope.getActiveSlide = function () {
                     return $scope.slides.filter(function (s) { return s.active; alert(s.active); })[0];
                 };
@@ -183,7 +194,7 @@
                   }
               });
 
-            $urlRouterProvider.otherwise('home');
+            $urlRouterProvider.otherwise('presentation');
         }]);
 
         app.config(['$httpProvider', function ($httpProvider) {
@@ -228,17 +239,56 @@
                   <div class="carousel-caption">
                     <h4>Slide {{$index+1}}</h4>
                   </div>
+                  <div class="row">
+             <h1>{{slide.Heading}} </h1>
+             <h1>{{slide.Description}} </h1>
+             <!--<h1> This is Slide number -  {{getActiveSlide()}}</h1>-->
+              </div>
+
                 </slide>
               </carousel>
             </div>
         </div>
-                          <div class="row">
-             <h1>This is home screen .Best for showing dashboards, summaries etc </h1>
-             <h1>This is home screen .Best for showing dashboards, summaries etc </h1>
-             <h1>This is home screen .Best for showing dashboards, summaries etc </h1>
-             <h1>This is home screen .Best for showing dashboards, summaries etc </h1>
-             <h1> This is Slide number -  {{getActiveSlide()}}</h1>
-        </div>
+         
+           <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="input-group">
+                    <!--<div class="input-group-btn search-panel">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span id="search_concept">Search by Business</span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Search by ID</a></li>
+                            <li><a href="#">Search by Party name</a></li>
+                        </ul>
+                    </div>-->
+                    <input type="hidden" name="search_param" value="all" id="search_param">
+                    <input type="text" ng-model="searchText" class="form-control" name="x" placeholder="Search Permissions...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                    <span class="input-group-btn">
+                        <!-- Button trigger modal -->
+                        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></button>
+                    </span>
+                </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr ng-repeat="idea in ideas | filter:searchText | orderBy:'+ID'">
+                            <td><h5>{{idea["SlNo:"]}}</h5></td>
+                            <td><h5><a href={{"#/permissions/"+idea.Name}}>{{idea.IdeaDescription}}</a></h5></td>
+                            <td> {{idea["Benefit"]}}</td>
+                            <td class="text-right">{{idea.ID}}</td>
+                            <td><span type="button" class="btn btn-success"><a href={{"#/permissions/"+idea.Division}}>View</a></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+         </div>           
 
         <!-- rest of template -->
     </script>
