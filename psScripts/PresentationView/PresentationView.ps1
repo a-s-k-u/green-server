@@ -1,6 +1,6 @@
 function getIdeas
 {
-$dataPath = [io.path]::combine($global:rootFolder,'PresentationView\ADM1Digithonideas.csv')
+$dataPath = [io.path]::combine($global:rootFolder,'PresentationView\ideas.csv')
 $a = Import-Csv -Path $dataPath | ConvertTo-Json
 return $a
 }
