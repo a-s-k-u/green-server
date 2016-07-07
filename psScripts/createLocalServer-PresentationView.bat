@@ -1,2 +1,1 @@
-PowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command "& '%~dpn0.ps1'" '%~dp0'
- 'hello' PAUSE
+PowerShell.exe -NoProfile -ExecutionPolicy Bypass -Command "& '%~dp0createLocalServer.ps1'" '%~dp0PresentationView' PAUSE
