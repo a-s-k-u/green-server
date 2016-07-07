@@ -16,10 +16,13 @@
  #*=============================================================================
 "Control reached powershell - setting up a local server/listener"
 #----------------------------------------------------------------
-$path=$args[0]
+$global:rootFolder = $args[0]
+$path= $args[0]
+$global:projectFolder = $args[1]
+'Project Folder is -- ' + $global:projectFolder
 #----------------------------------------------------------------
-"Checking for configuration file at path " + $path 
-$configFilePath = [io.path]::combine($path,'app.csv')  # using .NET Path class instead of join-path commandlet for consistency.
+"Checking for configuration file at path " + $global:projectFolder
+$configFilePath = [io.path]::combine($global:projectFolder,'app.csv')  # using .NET Path class instead of join-path commandlet for consistency.
 #----------------------------------------------------------------
 "Reading Configuration File " + $configFilePath
 $appConfig = Import-Csv -Path $configFilePath
@@ -43,8 +46,7 @@ foreach($r in $appConfig)
     }
 }
 #----------------------------------------------------------------
-ShowSampleString
-" Pages - " + $Pages
+" Pages - " + $Pages.ToString();
 $listener = New-Object Net.HttpListener
 $listener.Prefixes.Add("http://localhost:8081/")
 "Starting the local server at port 8081"
@@ -67,6 +69,8 @@ While ($listener.IsListening) {
     $thisPage = $Pages['/' + $request.Url.Segments[1] + '[0]']
     $thisGETAPI = $GET_APIs['/' + $request.Url.Segments[1] + '[' + $paramCount + ']']
 
+    'Debug : This Page is ' + $thisPage;
+
     if($thisPage)
     {
         $pagePath = [io.path]::combine($path,$thisPage) 
@@ -79,7 +83,8 @@ While ($listener.IsListening) {
             {
               $args = $args + " " + $request.Url.Segments[$i + 2]
             } 
-        &($thisGETAPI + ' ' + $args)
+        if($args -ne "") { $args = ' ' + $args } # addign a space seperator before callign the arguements
+        $page = &($thisGETAPI + $args)
 
     }
     elseif ($request.RawUrl.ToLower().StartsWith("/party"))
@@ -89,7 +94,7 @@ While ($listener.IsListening) {
     }
     else
     {
-    $page = Get-Content -Path ($path + '/index.html') -Raw
+    $page = " incorrect URL" #Get-Content -Path ($path + '/index.html') -Raw
     #$page = $page.Replace('js/',$path + '/js/');
     #$page = $page.Replace('css/',$path + '/css/');
     #$page = $page.Replace('images/',$path + '/images/') 
