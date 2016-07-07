@@ -1,0 +1,6 @@
+URI,Params,Location,Type
+Script,0,APIs/PresentationView.ps1,ScriptFile
+/home,0,Pages/PresentationView.html,Page
+/ideas,1,getIdea,GET
+/ideas,0,getIdeas,GET
+/slides,0,getSlides,GET
