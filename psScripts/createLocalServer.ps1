@@ -16,10 +16,8 @@
  #*=============================================================================
 "Control reached powershell - setting up a local server/listener"
 #----------------------------------------------------------------
-$global:rootFolder = $args[0]
-$path= $args[0]
-$global:projectFolder = $args[1]
-'Project Folder is -- ' + $global:projectFolder
+$global:projectFolder = $args[0]
+'args - 0 is ' + $args[0]
 #----------------------------------------------------------------
 "Checking for configuration file at path " + $global:projectFolder
 $configFilePath = [io.path]::combine($global:projectFolder,'app.csv')  # using .NET Path class instead of join-path commandlet for consistency.
@@ -41,7 +39,7 @@ foreach($r in $appConfig)
     }
     elseif ( $r.Type -eq 'ScriptFile' )
     {
-       $scriptPath = [io.path]::combine($path,$r.Location)
+       $scriptPath = [io.path]::combine($global:projectFolder,$r.Location)
       . $scriptPath
     }
 }
@@ -73,7 +71,7 @@ While ($listener.IsListening) {
 
     if($thisPage)
     {
-        $pagePath = [io.path]::combine($path,$thisPage) 
+        $pagePath = [io.path]::combine($global:projectFolder,$thisPage) 
         $page = Get-Content -Path ($pagePath) -Raw
     }
     elseif ($thisGETAPI) 
