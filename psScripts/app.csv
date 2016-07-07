@@ -1,7 +1,0 @@
-URI,Params,Location,Type
-Script,0,PresentationView\PresentationView.ps1,ScriptFile
-DataFolder,0,SoftwareData.csv,Data
-/home,0,PresentationView\PresentationView.html,Page
-/angularApp.js,0,PresentationView\Scripts\angularApp.js,Page
-/softwares,1,getSoftware,GET
-/softwares,0,getSoftwares,GET
