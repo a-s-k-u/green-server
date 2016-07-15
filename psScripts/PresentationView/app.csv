@@ -1,6 +1,8 @@
 URI,Params,Location,Type
-Script,0,APIs/PresentationView.ps1,ScriptFile
+Script,0,APIs/PresentationView.ps1,PSScriptFile
 /home,0,Pages/PresentationView.html,Page
+/angularApp.js,0,JS/angularApp.js,JS
+/angularApp.css,0,CSS/angularApp.css,CSS
 /ideas,1,getIdea,GET
 /ideas,0,getIdeas,GET
 /slides,0,getSlides,GET
