@@ -26,6 +26,8 @@ $configFilePath = [io.path]::combine($global:projectFolder,'app.csv')  # using .
 $appConfig = Import-Csv -Path $configFilePath
 #----------------------------------------------------------------
 $Pages=@{}
+$JS=@{}
+$CSS=@{}
 $GET_APIs = @{}
 foreach($r in $appConfig)
 {
@@ -33,11 +35,19 @@ foreach($r in $appConfig)
     {
     $Pages[$r.URI + '[0]']=$r.Location
     }
+    if ( $r.Type -eq 'JS')
+    {
+    $JS[$r.URI + '[0]']=$r.Location
+    }
+    if ( $r.Type -eq 'CSS')
+    {
+    $CSS[$r.URI + '[0]']=$r.Location
+    }
     elseif ( $r.Type -eq 'GET')
     {
     $GET_APIs[$r.URI + '[' + $r.Params + ']'] = $r.Location
     }
-    elseif ( $r.Type -eq 'ScriptFile' )
+    elseif ( $r.Type -eq 'PSScriptFile' )
     {
        $scriptPath = [io.path]::combine($global:projectFolder,$r.Location)
       . $scriptPath
@@ -66,13 +76,31 @@ While ($listener.IsListening) {
     $paramCount =  $request.Url.Segments.Count - 2
     $thisPage = $Pages['/' + $request.Url.Segments[1] + '[0]']
     $thisGETAPI = $GET_APIs['/' + $request.Url.Segments[1] + '[' + $paramCount + ']']
+    $thisJSFile = $JS['/' + $request.Url.Segments[1] + '[0]']
+    $thisCSSFile = $CSS['/' + $request.Url.Segments[1] + '[0]']
 
     'Debug : This Page is ' + $thisPage;
+    'Debug : This JS File is ' + $thisJSFile;
+
+     $response = $context.Response
 
     if($thisPage)
     {
         $pagePath = [io.path]::combine($global:projectFolder,$thisPage) 
         $page = Get-Content -Path ($pagePath) -Raw
+        $response.Headers.Add("Content-Type","text/html")
+    }
+    elseif($thisJSFile)
+    {
+        $jsPath = [io.path]::combine($global:projectFolder,$thisJSFile) 
+        $page = Get-Content -Path ($jsPath) -Raw 
+        $response.Headers.Add("Content-Type","application/javascript") 
+    }
+    elseif($thisCSSFile)
+    {
+        $cssPath = [io.path]::combine($global:projectFolder,$thisCSSFile) 
+        $page = Get-Content -Path ($cssPath) -Raw 
+        $response.Headers.Add("Content-Type","text/css") 
     }
     elseif ($thisGETAPI) 
     {   
@@ -83,23 +111,14 @@ While ($listener.IsListening) {
             } 
         if($args -ne "") { $args = ' ' + $args } # addign a space seperator before callign the arguements
         $page = &($thisGETAPI + $args)
-
-    }
-    elseif ($request.RawUrl.ToLower().StartsWith("/party"))
-    {
-    $partyID = $context.Request.QueryString["id"];
-    $page = $partyID
+        $response.Headers.Add("Content-Type","application/json")
     }
     else
     {
-    $page = " incorrect URL" #Get-Content -Path ($path + '/index.html') -Raw
-    #$page = $page.Replace('js/',$path + '/js/');
-    #$page = $page.Replace('css/',$path + '/css/');
-    #$page = $page.Replace('images/',$path + '/images/') 
-    #$page = $page.Replace('pages/',$path + '/pages/')      
+    $page = " incorrect URL"
+    $response.Headers.Add("Content-Type","text/html")     
     }
-    $response = $context.Response
-    $response.Headers.Add("Content-Type","text/html")
+
     $buffer = [System.Text.Encoding]::UTF8.GetBytes($page)
     $response.ContentLength64 = $buffer.Length
     $response.OutputStream.Write($buffer,0,$buffer.Length)
