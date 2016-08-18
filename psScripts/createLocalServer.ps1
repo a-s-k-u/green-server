@@ -64,65 +64,73 @@ $listener.Start()
 "Opening the browser"
 Start-Process -FilePath "http://localhost:8081/home"
 "Browser Opened with the url to local server"
-While ($listener.IsListening) {
-    $context = $listener.GetContext()
-    $request = $context.Request
-    "Raw URL " + $request.RawUrl
 
-    $scriptpath = $MyInvocation.MyCommand.Path
-    $dir = Split-Path $scriptpath
-    Write-host "My directory is $dir"
+try{
 
-    $paramCount =  $request.Url.Segments.Count - 2
-    $thisPage = $Pages['/' + $request.Url.Segments[1] + '[0]']
-    $thisGETAPI = $GET_APIs['/' + $request.Url.Segments[1] + '[' + $paramCount + ']']
-    $thisJSFile = $JS['/' + $request.Url.Segments[1] + '[0]']
-    $thisCSSFile = $CSS['/' + $request.Url.Segments[1] + '[0]']
+    While ($listener.IsListening){
+        $context = $listener.GetContext()
+        $request = $context.Request
+        "Raw URL " + $request.RawUrl
 
-    'Debug : This Page is ' + $thisPage;
-    'Debug : This JS File is ' + $thisJSFile;
+        $scriptpath = $MyInvocation.MyCommand.Path
+        $dir = Split-Path $scriptpath
+        Write-host "My directory is $dir"
 
-     $response = $context.Response
+        $paramCount =  $request.Url.Segments.Count - 2
+        $thisPage = $Pages['/' + $request.Url.Segments[1] + '[0]']
+        $thisGETAPI = $GET_APIs['/' + $request.Url.Segments[1] + '[' + $paramCount + ']']
+        $thisJSFile = $JS['/' + $request.Url.Segments[1] + '[0]']
+        $thisCSSFile = $CSS['/' + $request.Url.Segments[1] + '[0]']
 
-    if($thisPage)
-    {
-        $pagePath = [io.path]::combine($global:projectFolder,$thisPage) 
-        $page = Get-Content -Path ($pagePath) -Raw
-        $response.Headers.Add("Content-Type","text/html")
+        'Debug : This Page is ' + $thisPage;
+        'Debug : This JS File is ' + $thisJSFile;
+
+         $response = $context.Response
+
+        if($thisPage)
+        {
+            $pagePath = [io.path]::combine($global:projectFolder,$thisPage) 
+            $page = Get-Content -Path ($pagePath) -Raw
+            $response.Headers.Add("Content-Type","text/html")
+        }
+        elseif($thisJSFile)
+        {
+            $jsPath = [io.path]::combine($global:projectFolder,$thisJSFile) 
+            $page = Get-Content -Path ($jsPath) -Raw 
+            $response.Headers.Add("Content-Type","application/javascript") 
+        }
+        elseif($thisCSSFile)
+        {
+            $cssPath = [io.path]::combine($global:projectFolder,$thisCSSFile) 
+            $page = Get-Content -Path ($cssPath) -Raw 
+            $response.Headers.Add("Content-Type","text/css") 
+        }
+        elseif ($thisGETAPI) 
+        {   
+            $args = "";  
+            for ($i=1; $i -le $paramCount; $i++)
+                {
+                  $args = $args + " " + $request.Url.Segments[$i + 2]
+                } 
+            if($args -ne "") { $args = ' ' + $args } # addign a space seperator before callign the arguements
+            $page = &($thisGETAPI + $args)
+            $response.Headers.Add("Content-Type","application/json")
+        }
+        else
+        {
+        $page = " incorrect URL"
+        $response.Headers.Add("Content-Type","text/html")     
+        }
+
+        $buffer = [System.Text.Encoding]::UTF8.GetBytes($page)
+        $response.ContentLength64 = $buffer.Length
+        $response.OutputStream.Write($buffer,0,$buffer.Length)
+        $response.Close()
+        "Response sent to browser"
     }
-    elseif($thisJSFile)
-    {
-        $jsPath = [io.path]::combine($global:projectFolder,$thisJSFile) 
-        $page = Get-Content -Path ($jsPath) -Raw 
-        $response.Headers.Add("Content-Type","application/javascript") 
-    }
-    elseif($thisCSSFile)
-    {
-        $cssPath = [io.path]::combine($global:projectFolder,$thisCSSFile) 
-        $page = Get-Content -Path ($cssPath) -Raw 
-        $response.Headers.Add("Content-Type","text/css") 
-    }
-    elseif ($thisGETAPI) 
-    {   
-        $args = "";  
-        for ($i=1; $i -le $paramCount; $i++)
-            {
-              $args = $args + " " + $request.Url.Segments[$i + 2]
-            } 
-        if($args -ne "") { $args = ' ' + $args } # addign a space seperator before callign the arguements
-        $page = &($thisGETAPI + $args)
-        $response.Headers.Add("Content-Type","application/json")
-    }
-    else
-    {
-    $page = " incorrect URL"
-    $response.Headers.Add("Content-Type","text/html")     
-    }
 
-    $buffer = [System.Text.Encoding]::UTF8.GetBytes($page)
-    $response.ContentLength64 = $buffer.Length
-    $response.OutputStream.Write($buffer,0,$buffer.Length)
-    $response.Close()
-    "Response sent to browser"
+} 
+finally {
+    $listener.Stop()
+    $listener.Close()
 }
-$listener.Stop()
