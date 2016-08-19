@@ -16,14 +16,8 @@
  #*=============================================================================
 "Control reached powershell - setting up a local server/listener"
 #----------------------------------------------------------------
-$global:projectFolder = 'C:\Users\i84446\Downloads\green-server-master\green-server-master\psScripts\PresentationView' # $args[0]
-'args - 0 is ' #+ $args[0]
-#----------------------------------------------------------------
-"Checking for configuration file at path " + $global:projectFolder
-$configFilePath = [io.path]::combine($global:projectFolder,'app.csv')  # using .NET Path class instead of join-path commandlet for consistency.
-#----------------------------------------------------------------
-"Reading Configuration File " + $configFilePath
-#$appConfig = Import-Csv -Path $configFilePath
+$global:projectFolder = $args[0]
+'args - 0 is ' + $args[0]
 #----------------------------------------------------------------
 "Including PS Script"
 $scriptPath = [io.path]::combine($global:projectFolder,'PSScript.ps1')
