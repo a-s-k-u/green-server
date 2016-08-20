@@ -23,6 +23,14 @@
                     angular.copy(data[0], o.party);
                 });
             };
+			
+			o.createNewIdea = function(idea){
+			alert(idea);
+			  return $http.post('/ideas', angular.toJson(idea)).success(function(status){
+			   alert("Idea Created");
+			   o.getAll();
+			  });
+			};
            
             return o;
         }]);
@@ -74,6 +82,11 @@
               $scope.getActiveSlide = function () {
                     return $scope.slides.filter(function (s) { return s.active; alert(s.active); })[0];
                 };
+				
+			  $scope.newIdea;
+			  $scope.createIdea = function() {
+				 webServiceCall.createNewIdea($scope.newIdea);
+			  };
         }]);
 
         //configures which html piece to load and determines state.
