@@ -63,7 +63,7 @@ try{
             $page = Get-Content -Path ($cssPath) -Raw 
             $response.Headers.Add("Content-Type","text/css") 
         }
-        elseif($request.HttpMethod.ToUpper() = 'GET'){
+        elseif($request.HttpMethod.ToUpper() -eq 'GET'){
             $paramCount =  $request.Url.Segments.Count - 2
 
             $args = "";  
@@ -78,8 +78,15 @@ try{
             $page = &($methodName + $args)
             $response.Headers.Add("Content-Type","application/json")
         }
-        elseif($request.HttpMethod.ToUpper() = 'POST'){
-         'POST METHOD ENCOUNTERED'
+        elseif($request.HttpMethod.ToUpper() -eq 'POST'){
+             $StreamReader = New-Object System.IO.StreamReader $request.InputStream
+             $StreamData = $StreamReader.ReadToEnd()
+             $JSON = $StreamData | ConvertFrom-Json
+             $methodName = $request.HttpMethod + $request.Url.Segments[1]
+             $exp = $methodName + ' $JSON'
+             $page = Invoke-Expression $exp
+             $response.Headers.Add("Content-Type","application/json")
+
         }
         else{
             $page = " incorrect URL"
@@ -96,6 +103,7 @@ try{
 } 
 catch{
 'SOME EXCEPTION THROWN'
+Write-Host $_.Exception.Message
 }
 finally{
     $listener.Stop()
