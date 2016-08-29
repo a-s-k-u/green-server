@@ -1,0 +1,5 @@
+ScoreCardID,ProcessName,ScoreType,Item1,Item2,Item3,Item4,Item5,Item6,Item7,Item8,Item9,Item10,Total
+1,Program Business,Feasibility,1,2,3,4,5,1,2,3,4,5,0
+1,Program Business,Risk,1,2,3,4,5,1,2,3,4,5,0
+2,ABC,Feasibility,1,2,3,4,5,1,2,3,4,5,0
+2,ABC,Risk,1,2,3,4,5,1,2,3,4,5,0
