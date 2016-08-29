@@ -1,0 +1,14 @@
+ID,Name,Definition,Score01,Score05,Comments,Weightage,SelectedValue
+1,Decouplable,How easily can the process be separated from other processes and operations ?,Impossible to de-couple, Already Outsourced,,10,0
+2,Manual Intensive,How many FTE are currently dedicated to providing this capability ?,Entirely automated ,Extremely intensive,,10,0
+3,IT/Communication,Are the systems suitable for use from and in an offshore location ?,Systems not equipped for interface,Interface with minimum effort,,10,0
+4,Direct contact with customer,How does the process interact with the external customer ?,Face to Face required,No contact at all,,10,0
+5,Level of standardisation,Does the process occur to set standards ?,Not standard at all,Very standardised,Standardised per program as per program guidelines,10,0
+6,Legal/Regulatory factors,Impact of legal regulatory requirements ,Legislation against move,No regulations involved,,10,0
+7,HR/Skill availability,How specialist are the personnel or skills required ?,Specialised Skills,Skills/workforce easily available,,10,0
+8,Business Continuity,"How essential is the process to business operations, or how rapidly can service be restored","Essential for Business critical operations, service can not be re-established rapidly","Low impact on business critical operations, or service can be restored rapidly",,10,0
+9,Stakeholders openness to change,What is the likely reaction of key stakeholders to this change ?,"Little support, widely opposed",Full support (at all management levels),,10,0
+10,Complexity & Language requirement,"How complex is the activity ?
+Do we need any language competency?","Extremely high : a lot of knowledge to be captured, many configurations, challenging to train; Need high level language competency and fluency","Simple process
+Less language skills required
+could be scripted",,10,0
