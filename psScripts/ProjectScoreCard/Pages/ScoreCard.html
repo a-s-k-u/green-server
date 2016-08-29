@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Project Score Card</title>
+
+    <!-- Bootstrap Core CSS -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body ng-app="scoreCardApp">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <!--<li>
+                        <a href="#">Home</a>
+                    </li>-->
+                    <!--<li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>-->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- Page Content -->
+    <div class="container">
+        <ui-view></ui-view>
+    </div>
+    <!-- /.container -->
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-more.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <!-- jQuery Version 1.12.4 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- Angular JS Core -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!-- Angular module - UI Router-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <!-- Angular bootstrap-->
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+     <!-- Custom Scripts-->
+    <script type="text/JavaScript" src="../JS/angularApp.js"></script>
+
+    <script type="text/ng-template" id="/home.html">
+	    
+		<div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="input-group">
+                    <input type="hidden" name="search_param" value="all" id="search_param">
+                    <input type="text" ng-model="searchText" class="form-control" name="x" placeholder="Search score cards...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                    <span class="input-group-btn">
+                        <!-- Button trigger modal -->
+                        <button class="btn btn-default" disabled type="button" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></button>
+                    </span>
+                </div>
+            </div>
+         </div>
+         <div class="row">
+		 <div class="col-xs-6">
+		 <div showgraph1="" id="container" style="height: 400px; min-width: 310px; max-width: 600px; margin: 0 auto"></div>
+		 </div>
+            <div class="col-xs-6 col-xs-offset-0">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr ng-repeat="score in allScores | filter:searchText">
+                            <td><h5>{{score["SlNo:"]}}</h5></td>
+                            <td><h5><a href={{"#/details/"+idea.ScoreCardID}}>{{score.ScoreCardID}}</a></h5></td>
+                            <td><h5> {{score["ProcessName"]}} </h5></td>
+                            <td><span type="button" class="btn btn-success"><a href={{"#/details/"+score.ScoreCardID}}>View</a></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+         </div>       
+
+        <!-- rest of template -->
+    </script>
+	<script type="text/ng-template" id="/details.html">
+
+        <div class="row">
+             <h1> Section 2 - Feasibility </h1>
+			 <table class="table table-hover">
+			 <thead>
+			 <tr>
+			 <th>Factor</th><th>Rating</th><th>Selected Value</th><th>Weightage</th>
+			 </tr>
+			 </thead>
+			 <tfoot>
+			 <tr>
+			 <td></td>
+			 <td></td>
+			 <td> Sum - {{getFeasibilityCount()}}</td>
+			 </tr>
+			 </tfoot>
+			 <tbody>
+				  <tr ng-repeat="factor in score.Feasibility">
+				  <td>{{factor.Name}}</td>
+				  <td>
+					  <label class="radio-inline" ng-repeat="rating in ratings">
+						  <input type="radio" ng-model="factor.SelectedValue" name="{{factor.ID}}" id="{{factor.ID}}" value="{{rating.value}}"> {{rating.value}}
+					  </label>
+				  </td>
+				  <td>
+					{{factor.SelectedValue}}
+				  </td>
+				  <td>
+					{{factor.Weightage}} %
+				  </td>
+				  </tr>
+			  </tbody>
+			  
+			</table>
+        </div>
+		
+		 <div class="row">
+             <h1> Section 3 - Risk / Impact assessment </h1>
+			 <table class="table table-hover">
+			 <thead>
+			 <tr>
+			 <th>Factor</th><th>Rating</th><th>Selected Value</th><th>Weightage</th>
+			 </tr>
+			 </thead>
+			 <tfoot>
+			 <tr>
+			 <td></td>
+			 <td></td>
+			 <td> Sum - {{getRiskCount()}}</td>
+			 </tr>
+			 </tfoot>
+			 <tbody>
+				  <tr ng-repeat="factor in score.Risk">
+				  <td>{{factor.Name}}</td>
+				  <td>
+					  <label class="radio-inline" ng-repeat="rating in ratings">
+						  <input type="radio" ng-model="factor.SelectedValue" name="{{factor.ID}}" id="{{factor.ID}}" value="{{rating.value}}"> {{rating.value}}
+					  </label>
+				  </td>
+				  <td>
+					{{factor.SelectedValue}}
+				  </td>
+				  <td>
+					{{factor.Weightage}} %
+				  </td>
+				  </tr>
+			  </tbody>
+			  
+			</table>
+        </div>
+        <!-- rest of template -->
+    </script>
+	
+    <script type="text/ng-template" id="/presentation.html">
+
+        
+        <div id="slides_control">
+            <div>
+              <carousel interval="myInterval">
+                <slide ng-repeat="slide in slides" active="slide.active">
+                  <img ng-src="{{slide.image}}">
+                  <div class="carousel-caption">
+                    <h4>Slide {{$index+1}}</h4>
+                  </div>
+                  <div class="row">
+             <h1>{{slide.Heading}} </h1>
+             <h1>{{slide.Description}} </h1>
+             <!--<h1> This is Slide number -  {{getActiveSlide()}}</h1>-->
+              </div>
+
+                </slide>
+              </carousel>
+            </div>
+        </div>
+         
+           <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="input-group">
+                    <!--<div class="input-group-btn search-panel">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span id="search_concept">Search by Business</span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Search by ID</a></li>
+                            <li><a href="#">Search by Party name</a></li>
+                        </ul>
+                    </div>-->
+                    <input type="hidden" name="search_param" value="all" id="search_param">
+                    <input type="text" ng-model="searchText" class="form-control" name="x" placeholder="Search Permissions...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                    <span class="input-group-btn">
+                        <!-- Button trigger modal -->
+                        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span></button>
+                    </span>
+                </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr ng-repeat="idea in ideas | filter:searchText | orderBy:'+ID'">
+                            <td><h5>{{idea["SlNo:"]}}</h5></td>
+                            <td><h5><a href={{"#/permissions/"+idea.Name}}>{{idea.IdeaDescription}}</a></h5></td>
+                            <td> {{idea["Benefit"]}}</td>
+                            <td class="text-right">{{idea.ID}}</td>
+                            <td><span type="button" class="btn btn-success"><a href={{"#/permissions/"+idea.Division}}>View</a></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+         </div>           
+
+        <!-- rest of template -->
+		 <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add New Idea</h4>
+              </div>
+              <div class="modal-body">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="IdeaName" class="col-sm-2 control-label">Idea Name</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="IdeaName" ng-model="newIdea.ideaName" placeholder="Name of the Idea">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="IdeaDescription" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="ideaDescription" ng-model="newIdea.ideaDescription" placeholder="Enter Details">
+                    </div>
+                  </div>
+                 </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="createIdea()">Save Idea</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </script>
+
+
+    <script type="text/ng-template" id="/selectedParty.html">
+
+        <div class="row">
+             <h1>for showing individual details. </h1>
+        </div>
+
+    </script>
+</body>
+
+</html>
