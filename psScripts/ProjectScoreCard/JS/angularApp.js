@@ -14,10 +14,82 @@
 			}
 		});
 
-		
-		
-		
-		
+		app.directive('hcBubbleChart', function () {
+                return {
+                    restrict: 'E',
+                    template: '<div></div>',
+                    scope: {
+                        title: '@',
+                        data: '='
+                    },
+                    link: function (scope, element) {
+                        Highcharts.chart(element[0], {
+                            chart: {
+                                type: 'bubble',
+								plotBorderWidth: 1,
+							    zoomType: 'y'
+                            },
+                            title: {
+                                text: scope.title
+                            },
+							 xAxis: {
+								gridLineWidth: 1,
+								max: 60,
+								title: {
+									text: 'Feasibility'
+								},
+								labels: {
+									format: '{value} points'
+								}
+							},
+
+							yAxis: {
+								startOnTick: false,
+								endOnTick: false,
+								max: 60,
+								title: {
+									text: 'Risk / Impact Assessment'
+								},
+								labels: {
+									format: '{value} points'
+								}
+							},
+
+							tooltip: {
+								useHTML: true,
+								headerFormat: '<table>',
+								pointFormat: '<tr><th colspan="2"><h3>{point.country}</h3></th></tr>' +
+									'<tr><th>Feasibility Score:</th><td>{point.x}</td></tr>' +
+									'<tr><th>Risk Score:</th><td>{point.y}</td></tr>' +
+									'<tr><th>FTE:</th><td>{point.z}</td></tr>',
+								footerFormat: '</table>',
+								followPointer: false
+							},
+
+                            plotOptions: {
+                                series: {
+                                    dataLabels: {
+                                        enabled: true,
+                                        format: '{point.name}'
+                                    }
+                                }
+                            },
+                            series: [{
+                                data: scope.data
+                            },{
+								type: 'spline',
+								name: 'Low / Medium Migration Potential',
+								data:  [[0, 30],[30, 0]]
+							},{
+								type: 'spline',
+								name: 'Medium/ High Migration Potential',
+								data: [[3, 60],[30,30],[60, 0]]
+							}]
+                        });
+                    }
+                };
+            });
+
         //deals with all calls made to app server.
         app.factory('webServiceCall',['$http', function($http){
             var o = {
@@ -39,6 +111,7 @@
             o.get = function (id) {
                 return $http.get('/score/' + id).success(function (data) {
                     angular.copy(data, o.score);
+					console.log(o.score);
                 });
             };
 			
@@ -47,6 +120,24 @@
 			  return $http.post('/ideas', angular.toJson(idea)).success(function(status){
 			   alert("Idea Created");
 			   o.getAll();
+			  });
+			};
+			
+			o.createNewDimension = function(dimension){
+			  return $http.post('/CreateNewDimension', angular.toJson(dimension)).success(function(status){
+			   alert("New Dimension Created");
+			   o.getAll();
+			  });
+			};
+			
+			o.updateFeasibility = function(feasibility){
+			  return $http.post('/UpdateScore', angular.toJson(feasibility)).success(function(status){
+			   alert("Scores updated");
+			  });
+			};
+			o.deleteFeasibility = function(feasibility){
+			  return $http.post('/DeleteScore', angular.toJson(feasibility)).success(function(status){
+			   alert("Score Deleted");
 			  });
 			};
            
@@ -59,7 +150,15 @@
         'webServiceCall',
         function ($scope, webServiceCall) {
             $scope.allScores = webServiceCall.allScores;
+  
+			// Sample data for pie chart
 			
+			$scope.bubbleData = $scope.allScores;
+			$scope.newDimension;
+			$scope.createDimension = function(){
+				webServiceCall.createNewDimension($scope.newDimension);
+			}
+
         }]);
 
         //deals with UI updates
@@ -99,6 +198,16 @@
 				}
 				return total;
 			}
+			
+			$scope.updateFeasibility = function(){
+			      webServiceCall.updateFeasibility($scope.score);
+			}
+			
+			$scope.deleteFeasibility = function(){
+			      webServiceCall.deleteFeasibility($scope.score);
+				  $window.location.href = '#/home';
+			}
+
         }]);
 
          //deals with UI updates
