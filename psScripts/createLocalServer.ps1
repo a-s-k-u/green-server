@@ -63,19 +63,26 @@ try{
             $page = Get-Content -Path ($cssPath) -Raw 
             $response.Headers.Add("Content-Type","text/css") 
         }
+        elseif($request.RawUrl -Match ".ico"){
+            $page = ''
+            $response.Headers.Add("Content-Type","text/html")
+        }
         elseif($request.HttpMethod.ToUpper() -eq 'GET'){
             $paramCount =  $request.Url.Segments.Count - 2
-
+            Write-Host $request.Url.Segments;
             $args = "";  
             for ($i=1; $i -le $paramCount; $i++)
                 {
-                  $args = $args + " " + $request.Url.Segments[$i + 2]
+                  $args = $args + " " + $request.Url.Segments[$i + 1].TrimEnd('/')
                 } 
-            if($args -ne "") { $args = ' ' + $args } # addign a space seperator before callign the arguements
+            #if($args -ne "") { $args = ' ' + $args } # adding a space seperator before calling the arguements
 
 
-            $methodName = $request.HttpMethod + $request.Url.Segments[1]
-            $page = &($methodName + $args)
+            $methodName = $request.HttpMethod + $request.Url.Segments[1].TrimEnd('/')
+            $JSON = $args
+            $exp = $methodName + ' $JSON'
+            $page = Invoke-Expression $exp
+            #$page = &($methodName + $args)
             $response.Headers.Add("Content-Type","application/json")
         }
         elseif($request.HttpMethod.ToUpper() -eq 'POST'){
@@ -102,8 +109,11 @@ try{
 
 } 
 catch{
-'SOME EXCEPTION THROWN'
+'BELOW EXCEPTION THROWN'
 Write-Host $_.Exception.Message
+Write-Host "Press any key to continue ..."
+$x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+
 }
 finally{
     $listener.Stop()
