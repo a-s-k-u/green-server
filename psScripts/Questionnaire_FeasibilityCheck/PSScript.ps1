@@ -1,4 +1,4 @@
-
+ 
 
 function postCreateNewDimension($dimension)
 {
@@ -48,7 +48,7 @@ function postCreateNewDimension($dimension)
     return $csv | ConvertTo-Json
 }
 
-
+　
 function postUpdateBatch01($score){
         $userID = [Environment]::UserName
         $scoreCardPath = [io.path]::combine($global:projectFolder,'DataFolder\ScoreCards\' + $userID + '.csv');
@@ -144,7 +144,7 @@ function postUpdateBatch02($score){
         return $score | ConvertTo-Json
 }
 
-
+　
 function postUpdateAllBatches($score){
         $userID = [Environment]::UserName
         $scoreCardPath = [io.path]::combine($global:projectFolder,'DataFolder\ScoreCards\' + $userID + '.csv');
@@ -233,7 +233,7 @@ function postUpdateAllBatches($score){
         return $score | ConvertTo-Json
 }
 
-
+　
 function postDeleteScore($score){
     $id = $score.scoreID
     Write-Host 'ScoreCardID - ' + $id  
@@ -257,7 +257,7 @@ function postDeleteScore($score){
     return $score | ConvertTo-Json
 }
 
-
+　
 function getAllScores(){
         $userID = [Environment]::UserName
         $scoreCardPath = [io.path]::combine($global:projectFolder,'DataFolder\ScoreCards\' + $userID + '.csv');
@@ -275,13 +275,13 @@ function getAllScores(){
     
         $scores = Import-Csv -Path $scoreCardPath | group { $_.QuestionnaireID}
 
-
+　
         $scoreCount = $scores.Length
 
         $scores | foreach-object { 
             $qName = ""
             $qStatus = ""
-            $color = "blue"
+            $color = "#FFC200"
             $batch01Total = 0
             $batch02Total = 0
             $_.Group | foreach-object {
@@ -296,7 +296,7 @@ function getAllScores(){
                }
                
             }
-            if ( $batch02Total -gt ($batch01Total)){
+            if ( $batch02Total -gt (60 - $batch01Total)){
             $color = 'green'
             }elseif ($batch02Total -lt (30 - $batch01Total )){
             $color = 'red'
@@ -358,11 +358,40 @@ function getScore($id){
         }
 
         $batch03 = $questionnaireRatings | Where-Object {$_.BatchID -eq 3}
+        $batch03Score = Import-Csv -Path $scoreCardPath | Where-Object {$_.QuestionnaireID -eq $scoreID -and $_.BatchID -eq 3}
+        $batch03Status = $batch03Score.Status
+        $batch03 |
+           ForEach-Object {
+             $key = 'Item' + $_.QuestionID
+              $_.SelectedValue= $batch03Score | Select -ExpandProperty $key
+              if($batch03Status -ne 'Submitted'){
+                 $_.Comments = ''
+              }
+        }
+
         $batch04 = $questionnaireRatings | Where-Object {$_.BatchID -eq 4}
+        $batch04Score = Import-Csv -Path $scoreCardPath | Where-Object {$_.QuestionnaireID -eq $scoreID -and $_.BatchID -eq 4}
+        $batch04Status = $batch04Score.Status
+        $batch04 |
+           ForEach-Object {
+             $key = 'Item' + $_.QuestionID
+              $_.SelectedValue= $batch04Score | Select -ExpandProperty $key
+              if($batch04Status -ne 'Submitted'){
+                 $_.Comments = ''
+              }
+        }
+
         $batch05 = $questionnaireRatings | Where-Object {$_.BatchID -eq 5}
-
-
-
+        $batch05Score = Import-Csv -Path $scoreCardPath | Where-Object {$_.QuestionnaireID -eq $scoreID -and $_.BatchID -eq 5}
+        $batch05Status = $batch05Score.Status
+        $batch05 |
+           ForEach-Object {
+             $key = 'Item' + $_.QuestionID
+              $_.SelectedValue= $batch05Score | Select -ExpandProperty $key
+              if($batch05Status -ne 'Submitted'){
+                 $_.Comments = ''
+              }
+        }
 
         $collectionWithItems = @()
         $c = New-Object psobject -Property @{
@@ -424,4 +453,4 @@ $methodName = 'getScore'
 $exp = $methodName + ' $JSON'
 $page = Invoke-Expression $exp
 $page
-#>
+#> 
