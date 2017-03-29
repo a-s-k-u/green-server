@@ -5,7 +5,7 @@ webpackJsonp([1,4],{
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeamService; });
@@ -99,7 +99,7 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__team_service__ = __webpack_require__(100);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WorkItemsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -174,8 +174,8 @@ WorkItemsComponent = __decorate([
           </div>
         </div>
         `,*/
-        template: __webpack_require__(355),
-        styles: [__webpack_require__(343)]
+        template: __webpack_require__(348),
+        styles: [__webpack_require__(336)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__team_service__["a" /* TeamService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__team_service__["a" /* TeamService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _b || Object])
 ], WorkItemsComponent);
@@ -185,7 +185,7 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 141:
+/***/ 139:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(20)();
@@ -203,14 +203,14 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 143:
+/***/ 141:
 /***/ (function(module, exports) {
 
 module.exports = "<h3>Top Heroes</h3>\n<div class=\"grid grid-pad\">\n  <a *ngFor=\"let hero of heroes\"  [routerLink]=\"['/detail', hero.id]\"  class=\"col-1-4\">\n    <div class=\"module hero\">\n      <h4>{{hero.name}}</h4>\n    </div>\n  </a>\n</div>\n<hero-search></hero-search>\n\n<div class=\"container bootstrap snippet\">\n    <div class=\"table-responsive\">\n    \t<!-- PROJECT TABLE -->\n    \t<table class=\"table colored-header datatable project-list\">\n    \t\t<thead>\n    \t\t\t<tr>\n    \t\t\t\t<th>Title</th>\n    \t\t\t\t<th>Date Start</th>\n    \t\t\t\t<th>Days to Deadline</th>\n    \t\t\t\t<th>Progress</th>\n    \t\t\t\t<th>Priority</th>\n    \t\t\t\t<th>Leader</th>\n    \t\t\t\t<th>Status</th>\n    \t\t\t</tr>\n    \t\t</thead>\n    \t\t<tbody>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Spot Media</a></td>\n    \t\t\t\t<td>18-05-2014</td>\n    \t\t\t\t<td>12 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"95\" aria-valuenow=\"95\" style=\"width: 95%;\">95%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-warning\">MEDIUM</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar1.png\" alt=\"Avatar\" class=\"avatar img-circle\"> <a href=\"#\">Michael</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">E-Commerce Site</a></td>\n    \t\t\t\t<td>24-05-2014</td>\n    \t\t\t\t<td>30 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"40\" aria-valuenow=\"40\" style=\"width: 40%;\">40%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-success\">LOW</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar2.png\" alt=\"Avatar\" class=\"avatar img-circle\"> <a href=\"#\">Antonius</a></td>\n    \t\t\t\t<td><span class=\"label label-warning\">PENDING</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Project 123GO</a></td>\n    \t\t\t\t<td>20-09-2014</td>\n    \t\t\t\t<td>50 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"65\" aria-valuenow=\"65\" style=\"width: 65%;\">65%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-danger\">HIGH</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar3.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Antonius</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Wordpress Theme</a></td>\n    \t\t\t\t<td>05-10-2014</td>\n    \t\t\t\t<td>40 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"77\" aria-valuenow=\"77\" style=\"width: 77%;\">77%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-warning\">MEDIUM</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar4.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Michael</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Redesign Landing Page</a></td>\n    \t\t\t\t<td>15-11-2014</td>\n    \t\t\t\t<td>30 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"25\" aria-valuenow=\"25\" style=\"width: 25%;\">25%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-success\">LOW</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar4.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Jason</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Wordpress Theme</a></td>\n    \t\t\t\t<td>05-10-2014</td>\n    \t\t\t\t<td>N/A</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar progress-bar-default\" data-transitiongoal=\"100\" aria-valuenow=\"100\" style=\"width: 100%;\">100%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-default\">MEDIUM</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar6.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Michael</a></td>\n    \t\t\t\t<td><span class=\"label label-default\">CLOSED</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Redesign Landing Page</a></td>\n    \t\t\t\t<td>15-11-2014</td>\n    \t\t\t\t<td>30 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"33\" aria-valuenow=\"33\" style=\"width: 33%;\">33%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-success\">LOW</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar7.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Jason</a></td>\n    \t\t\t\t<td><span class=\"label label-warning\">PENDING</span></td>\n    \t\t\t</tr>\n    \t\t</tbody>\n    \t</table>\n    \t<!-- END PROJECT TABLE -->\n    </div>\n</div>\n"
 
 /***/ }),
 
-/***/ 161:
+/***/ 157:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -219,20 +219,20 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 161;
+webpackEmptyContext.id = 157;
 
 
 /***/ }),
 
-/***/ 162:
+/***/ 158:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(166);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(170);
 
 
 
@@ -245,12 +245,12 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 168:
+/***/ 164:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dashboard_component__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__heroes_component__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__hero_detail_component__ = __webpack_require__(96);
@@ -300,7 +300,7 @@ AppRoutingModule = __decorate([
 
 /***/ }),
 
-/***/ 169:
+/***/ 165:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -322,7 +322,7 @@ var AppComponent = (function () {
 AppComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'my-app',
-        template: __webpack_require__(348)
+        template: __webpack_require__(341)
     })
 ], AppComponent);
 
@@ -330,32 +330,30 @@ AppComponent = __decorate([
 
 /***/ }),
 
-/***/ 170:
+/***/ 166:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_routing_module__ = __webpack_require__(168);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular_in_memory_web_api__ = __webpack_require__(177);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__in_memory_data_service__ = __webpack_require__(173);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__(169);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dashboard_component__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__heroes_component__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__hero_detail_component__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__hero_service__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__party_service__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__team_service__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__hero_search_component__ = __webpack_require__(171);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__training_component__ = __webpack_require__(174);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__team_component__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__party_component__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__bookings_component__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__work_items_component__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_ng2_dragula_ng2_dragula__ = __webpack_require__(346);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_ng2_dragula_ng2_dragula___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20_ng2_dragula_ng2_dragula__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_routing_module__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dashboard_component__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__heroes_component__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__hero_detail_component__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__hero_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__party_service__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__team_service__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__hero_search_component__ = __webpack_require__(167);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__training_component__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__team_component__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__party_component__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__bookings_component__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__work_items_component__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_ng2_dragula_ng2_dragula__ = __webpack_require__(339);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_ng2_dragula_ng2_dragula___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18_ng2_dragula_ng2_dragula__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -369,8 +367,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 // Imports for loading & configuring the in-memory web api
-
-
+//import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+//import { InMemoryDataService }  from './in-memory-data.service';
 
 
 
@@ -396,24 +394,24 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
-            __WEBPACK_IMPORTED_MODULE_5_angular_in_memory_web_api__["a" /* InMemoryWebApiModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__in_memory_data_service__["a" /* InMemoryDataService */]),
+            //InMemoryWebApiModule.forRoot(InMemoryDataService),
             __WEBPACK_IMPORTED_MODULE_4__app_routing_module__["a" /* AppRoutingModule */],
-            __WEBPACK_IMPORTED_MODULE_20_ng2_dragula_ng2_dragula__["DragulaModule"]
+            __WEBPACK_IMPORTED_MODULE_18_ng2_dragula_ng2_dragula__["DragulaModule"]
         ],
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */],
-            __WEBPACK_IMPORTED_MODULE_8__dashboard_component__["a" /* DashboardComponent */],
-            __WEBPACK_IMPORTED_MODULE_10__hero_detail_component__["a" /* HeroDetailComponent */],
-            __WEBPACK_IMPORTED_MODULE_9__heroes_component__["a" /* HeroesComponent */],
-            __WEBPACK_IMPORTED_MODULE_14__hero_search_component__["a" /* HeroSearchComponent */],
-            __WEBPACK_IMPORTED_MODULE_15__training_component__["a" /* TrainingComponent */],
-            __WEBPACK_IMPORTED_MODULE_16__team_component__["a" /* TeamComponent */],
-            __WEBPACK_IMPORTED_MODULE_17__party_component__["a" /* PartyComponent */],
-            __WEBPACK_IMPORTED_MODULE_18__bookings_component__["a" /* BookingsComponent */],
-            __WEBPACK_IMPORTED_MODULE_19__work_items_component__["a" /* WorkItemsComponent */]
+            __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_6__dashboard_component__["a" /* DashboardComponent */],
+            __WEBPACK_IMPORTED_MODULE_8__hero_detail_component__["a" /* HeroDetailComponent */],
+            __WEBPACK_IMPORTED_MODULE_7__heroes_component__["a" /* HeroesComponent */],
+            __WEBPACK_IMPORTED_MODULE_12__hero_search_component__["a" /* HeroSearchComponent */],
+            __WEBPACK_IMPORTED_MODULE_13__training_component__["a" /* TrainingComponent */],
+            __WEBPACK_IMPORTED_MODULE_14__team_component__["a" /* TeamComponent */],
+            __WEBPACK_IMPORTED_MODULE_15__party_component__["a" /* PartyComponent */],
+            __WEBPACK_IMPORTED_MODULE_16__bookings_component__["a" /* BookingsComponent */],
+            __WEBPACK_IMPORTED_MODULE_17__work_items_component__["a" /* WorkItemsComponent */]
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_11__hero_service__["a" /* HeroService */], __WEBPACK_IMPORTED_MODULE_12__party_service__["a" /* PartyService */], __WEBPACK_IMPORTED_MODULE_20_ng2_dragula_ng2_dragula__["DragulaService"], __WEBPACK_IMPORTED_MODULE_13__team_service__["a" /* TeamService */]],
-        bootstrap: [__WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]]
+        providers: [__WEBPACK_IMPORTED_MODULE_9__hero_service__["a" /* HeroService */], __WEBPACK_IMPORTED_MODULE_10__party_service__["a" /* PartyService */], __WEBPACK_IMPORTED_MODULE_18_ng2_dragula_ng2_dragula__["DragulaService"], __WEBPACK_IMPORTED_MODULE_11__team_service__["a" /* TeamService */]],
+        bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
@@ -421,25 +419,25 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 171:
+/***/ 167:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_of__ = __webpack_require__(360);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_of__ = __webpack_require__(354);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_of__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_catch__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_catch__ = __webpack_require__(355);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_debounceTime__ = __webpack_require__(362);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_debounceTime__ = __webpack_require__(356);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_debounceTime___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_debounceTime__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_distinctUntilChanged__ = __webpack_require__(364);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_distinctUntilChanged__ = __webpack_require__(357);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_distinctUntilChanged___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_distinctUntilChanged__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__hero_search_service__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__hero_search_service__ = __webpack_require__(168);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeroSearchComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -494,8 +492,8 @@ var HeroSearchComponent = (function () {
 HeroSearchComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'hero-search',
-        template: __webpack_require__(351),
-        styles: [__webpack_require__(339)],
+        template: __webpack_require__(344),
+        styles: [__webpack_require__(332)],
         providers: [__WEBPACK_IMPORTED_MODULE_8__hero_search_service__["a" /* HeroSearchService */]]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_8__hero_search_service__["a" /* HeroSearchService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__hero_search_service__["a" /* HeroSearchService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _b || Object])
@@ -506,13 +504,13 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 172:
+/***/ 168:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(365);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(358);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeroSearchService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -548,56 +546,7 @@ var _a;
 
 /***/ }),
 
-/***/ 173:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InMemoryDataService; });
-var InMemoryDataService = (function () {
-    function InMemoryDataService() {
-    }
-    InMemoryDataService.prototype.createDb = function () {
-        var heroes = [
-            { id: 11, name: 'Mr. Nice' },
-            { id: 12, name: 'Narco' },
-            { id: 13, name: 'Bombasto' },
-            { id: 14, name: 'Celeritas' },
-            { id: 15, name: 'Magneta' },
-            { id: 16, name: 'RubberMan' },
-            { id: 17, name: 'Dynama' },
-            { id: 18, name: 'Dr IQ' },
-            { id: 19, name: 'Magma' },
-            { id: 20, name: 'Tornado' }
-        ];
-        var parties = [
-            { id: 11, name: 'Arun' },
-            { id: 12, name: 'Linu' },
-            { id: 13, name: 'Jose' },
-            { id: 14, name: 'Anoop' },
-            { id: 15, name: 'Akhil' },
-            { id: 16, name: 'Manu' },
-            { id: 17, name: 'Mani' },
-            { id: 18, name: 'Pravessh' },
-            { id: 19, name: 'Thomas' },
-            { id: 20, name: 'Madhav' }
-        ];
-        var bookings = [{}];
-        var workItems = [
-            { id: 1, name: 'Job Meeting', status: 'TODO', owner: 'Arun', storyPoints: 10 },
-            { id: 2, name: 'Job Meetin1g', status: 'TODO', owner: 'Arun', storyPoints: 10 },
-            { id: 3, name: 'Job Meeting2', status: 'TODO', owner: 'Arun', storyPoints: 10 },
-            { id: 4, name: 'Job Meeting5', status: 'TODO', owner: 'Arun', storyPoints: 10 }
-        ];
-        return { parties: parties, heroes: heroes, bookings: bookings, workItems: workItems };
-    };
-    return InMemoryDataService;
-}());
-
-//# sourceMappingURL=in-memory-data.service.js.map
-
-/***/ }),
-
-/***/ 174:
+/***/ 169:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -630,8 +579,8 @@ var TrainingComponent = (function () {
 TrainingComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'my-dashboard',
-        template: __webpack_require__(143),
-        styles: [__webpack_require__(141)]
+        template: __webpack_require__(141),
+        styles: [__webpack_require__(139)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__hero_service__["a" /* HeroService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__hero_service__["a" /* HeroService */]) === "function" && _a || Object])
 ], TrainingComponent);
@@ -641,7 +590,7 @@ var _a;
 
 /***/ }),
 
-/***/ 175:
+/***/ 170:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -658,7 +607,7 @@ var environment = {
 
 /***/ }),
 
-/***/ 337:
+/***/ 330:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(20)();
@@ -676,7 +625,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 338:
+/***/ 331:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(20)();
@@ -694,7 +643,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 339:
+/***/ 332:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(20)();
@@ -712,7 +661,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 340:
+/***/ 333:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(20)();
@@ -730,7 +679,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 341:
+/***/ 334:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(20)();
@@ -748,7 +697,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 342:
+/***/ 335:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(20)();
@@ -766,7 +715,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 343:
+/***/ 336:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(20)();
@@ -784,66 +733,66 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 348:
+/***/ 341:
 /***/ (function(module, exports) {
 
 module.exports = "<!-- Navigation -->\r\n<nav class=\"navbar navbar-default navbar-fixed-top\" role=\"navigation\">\r\n        <div class=\"container\">\r\n            <!-- Brand and toggle get grouped for better mobile display -->\r\n            <div class=\"navbar-header\">\r\n\t\t\t\t<a href=\"#\" class=\"navbar-left\"><img src=\"https://upload.wikimedia.org/wikipedia/commons/f/fc/Logo_Allianz.png\" style=\"max-width:100px; margin-top: -7px;\"></a>\r\n                <a class=\"navbar-brand\" routerLink=\"/dashboard\" routerLinkActive=\"active\">Dashboard</a>\r\n                <a class=\"navbar-brand\" routerLink=\"/team\" routerLinkActive=\"active\">Team</a>\r\n                 <a class=\"navbar-brand\" routerLink=\"/party\" routerLinkActive=\"active\">My Profile</a>\r\n                <!--<a class=\"navbar-brand\" routerLink=\"/heroes\" routerLinkActive=\"active\">Calendar</a>-->\r\n                <a class=\"navbar-brand\" routerLink=\"/workItems\" routerLinkActive=\"active\">Tasks</a>\r\n                <a class=\"navbar-brand\" routerLink=\"/meetingRooms\" routerLinkActive=\"active\">Meetings</a>\r\n            </div>\r\n        </div>\r\n        <!-- /.container -->\r\n</nav>\r\n<div class=\"container\">\r\n    <router-outlet></router-outlet>\r\n</div>"
 
 /***/ }),
 
-/***/ 349:
+/***/ 342:
 /***/ (function(module, exports) {
 
 module.exports = "\r\n<div class=\"container meetingRoomContainer bootstrap snippet\">\r\n    <div class=\"col-md-offset-1 col-md-10 col-sm-12 col-xs-12\">\r\n    \t<div class=\"row\">\r\n\t\t    <div class=\"col-md-12\">\r\n\t\t        <div class=\"widget-box\">\r\n\t\t            <div class=\"widget-header bordered-bottom bordered-themesecondary\">\r\n\t\t                <i class=\"widget-icon fa fa-tags themesecondary\"></i>\r\n\t\t                <h5 class=\"widget-caption themesecondary\">Today's meetings</h5>\r\n\t\t            </div><!--Widget Header-->\r\n\t\t            <div class=\"widget-body\">\r\n\t\t                <div class=\"widget-main no-padding\">\r\n\t\t                    <div class=\"tickets-container\">\r\n\t\t                        <ul class=\"tickets-list\">\r\n\t\t                            <li class=\"ticket-item\">\r\n\t\t                                <div class=\"row\">\r\n\t\t                                    <div class=\"ticket-user col-md-6 col-sm-12\">\r\n\t\t                                        <img src=\"http://bootdey.com/img/Content/user_1.jpg\" class=\"user-avatar\">\r\n\t\t                                        <span class=\"user-name\">Jade Team</span>\r\n\t\t                                        <span class=\"user-at\">at</span>\r\n\t\t                                        <span class=\"user-company\">Jasmine</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-time  col-md-4 col-sm-6 col-xs-12\">\r\n\t\t                                        <div class=\"divider hidden-md hidden-sm hidden-xs\"></div>\r\n\t\t                                        <i class=\"fa fa-clock-o\"></i>\r\n\t\t                                        <span class=\"time\">1 Hours Ago</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-type  col-md-2 col-sm-6 col-xs-12\">\r\n\t\t                                        <span class=\"divider hidden-xs\"></span>\r\n\t\t                                        <span class=\"type\">Status Updates</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-state bg-palegreen\">\r\n\t\t                                        <i class=\"fa fa-check\"></i>\r\n\t\t                                    </div>\r\n\t\t                                </div>\r\n\t\t                            </li>\r\n\t\t                            <li class=\"ticket-item\">\r\n\t\t                                <div class=\"row\">\r\n\t\t                                    <div class=\"ticket-user col-md-6 col-sm-12\">\r\n\t\t                                        <img src=\"http://bootdey.com/img/Content/user_2.jpg\" class=\"user-avatar\">\r\n\t\t                                        <span class=\"user-name\">Informatica</span>\r\n\t\t                                        <span class=\"user-at\">at</span>\r\n\t\t                                        <span class=\"user-company\">Violet</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-time  col-md-4 col-sm-6 col-xs-12\">\r\n\t\t                                        <div class=\"divider hidden-md hidden-sm hidden-xs\"></div>\r\n\t\t                                        <i class=\"fa fa-clock-o\"></i>\r\n\t\t                                        <span class=\"time\">in 1 hour</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-type  col-md-2 col-sm-6 col-xs-12\">\r\n\t\t                                        <span class=\"divider hidden-xs\"></span>\r\n\t\t                                        <span class=\"type\">Project Kick Off</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-state bg-palegreen\">\r\n\t\t                                        <i class=\"fa fa-check\"></i>\r\n\t\t                                    </div>\r\n\t\t                                </div>\r\n\t\t                            </li>\r\n\t\t                            <li class=\"ticket-item\">\r\n\t\t                                <div class=\"row\">\r\n\t\t                                    <div class=\"ticket-user col-md-6 col-sm-12\">\r\n\t\t                                        <img src=\"http://bootdey.com/img/Content/user_3.jpg\" class=\"user-avatar\">\r\n\t\t                                        <span class=\"user-name\">Nicolai Larson</span>\r\n\t\t                                        <span class=\"user-at\">at</span>\r\n\t\t                                        <span class=\"user-company\">Google</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-time  col-md-4 col-sm-6 col-xs-12\">\r\n\t\t                                        <div class=\"divider hidden-md hidden-sm hidden-xs\"></div>\r\n\t\t                                        <i class=\"fa fa-clock-o\"></i>\r\n\t\t                                        <span class=\"time\">18 Hours Ago</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-type  col-md-2 col-sm-6 col-xs-12\">\r\n\t\t                                        <span class=\"divider hidden-xs\"></span>\r\n\t\t                                        <span class=\"type\">Issue</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-state bg-darkorange\">\r\n\t\t                                        <i class=\"fa fa-times\"></i>\r\n\t\t                                    </div>\r\n\t\t                                </div>\r\n\t\t                            </li>\r\n\t\t                            <li class=\"ticket-item\">\r\n\t\t                                <div class=\"row\">\r\n\t\t                                    <div class=\"ticket-user col-md-6 col-sm-12\">\r\n\t\t                                        <img src=\"http://bootdey.com/img/Content/user_1.jpg\" class=\"user-avatar\">\r\n\t\t                                        <span class=\"user-name\">Bill Jackson</span>\r\n\t\t                                        <span class=\"user-at\">at</span>\r\n\t\t                                        <span class=\"user-company\">Mabna</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-time  col-md-4 col-sm-6 col-xs-12\">\r\n\t\t                                        <div class=\"divider hidden-md hidden-sm hidden-xs\"></div>\r\n\t\t                                        <i class=\"fa fa-clock-o\"></i>\r\n\t\t                                        <span class=\"time\">2 days Ago</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-type  col-md-2 col-sm-6 col-xs-12\">\r\n\t\t                                        <span class=\"divider hidden-xs\"></span>\r\n\t\t                                        <span class=\"type\">Payment</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-state bg-palegreen\">\r\n\t\t                                        <i class=\"fa fa-check\"></i>\r\n\t\t                                    </div>\r\n\t\t                                </div>\r\n\t\t                            </li>\r\n\t\t                            <li class=\"ticket-item\">\r\n\t\t                                <div class=\"row\">\r\n\t\t                                    <div class=\"ticket-user col-md-6 col-sm-12\">\r\n\t\t                                        <img src=\"http://bootdey.com/img/Content/user_2.jpg\" class=\"user-avatar\">\r\n\t\t                                        <span class=\"user-name\">Eric Clapton</span>\r\n\t\t                                        <span class=\"user-at\">at</span>\r\n\t\t                                        <span class=\"user-company\">Musicker</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-time  col-md-4 col-sm-6 col-xs-12\">\r\n\t\t                                        <div class=\"divider hidden-md hidden-sm hidden-xs\"></div>\r\n\t\t                                        <i class=\"fa fa-clock-o\"></i>\r\n\t\t                                        <span class=\"time\">2 days Ago</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-type  col-md-2 col-sm-6 col-xs-12\">\r\n\t\t                                        <span class=\"divider hidden-xs\"></span>\r\n\t\t                                        <span class=\"type\">Info</span>\r\n\t\t                                    </div>\r\n\t\t                                    <div class=\"ticket-state bg-yellow\">\r\n\t\t                                        <i class=\"fa fa-info\"></i>\r\n\t\t                                    </div>\r\n\t\t                                </div>\r\n\t\t                            </li>\r\n\t\t                        </ul>\r\n\t\t                    </div>\r\n\t\t                </div>\r\n\t\t            </div>\r\n\t\t        </div>\r\n\t\t    </div>\r\n\t\t</div>\r\n\t</div>\r\n</div>                    "
 
 /***/ }),
 
-/***/ 350:
+/***/ 343:
 /***/ (function(module, exports) {
 
 module.exports = "<div *ngIf=\"hero\">\n  <h2>{{hero.name}} details!</h2>\n  <div>\n    <label>id: </label>{{hero.id}}</div>\n  <div>\n    <label>name: </label>\n    <input [(ngModel)]=\"hero.name\" placeholder=\"name\" />\n   </div>\n  <button (click)=\"goBack()\">Back</button>\n  <button (click)=\"save()\">Save</button>\n</div>\n"
 
 /***/ }),
 
-/***/ 351:
+/***/ 344:
 /***/ (function(module, exports) {
 
 module.exports = "<div id=\"search-component\">\n  <h4>Hero Search</h4>\n  <input #searchBox id=\"search-box\" (keyup)=\"search(searchBox.value)\" />\n  <div>\n    <div *ngFor=\"let hero of heroes | async\"\n         (click)=\"gotoDetail(hero)\" class=\"search-result\" >\n      {{hero.name}}\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
-/***/ 352:
+/***/ 345:
 /***/ (function(module, exports) {
 
 module.exports = "<h2>My Heroes</h2>\n<div>\n  <label>Hero name:</label> <input #heroName />\n  <button (click)=\"add(heroName.value); heroName.value=''\">\n    Add\n  </button>\n</div>\n<ul class=\"heroes\">\n  <li *ngFor=\"let hero of heroes\" (click)=\"onSelect(hero)\"\n      [class.selected]=\"hero === selectedHero\">\n    <span class=\"badge\">{{hero.id}}</span>\n    <span>{{hero.name}}</span>\n    <button class=\"delete\"\n      (click)=\"delete(hero); $event.stopPropagation()\">x</button>\n  </li>\n</ul>\n<div *ngIf=\"selectedHero\">\n  <h2>\n    {{selectedHero.name | uppercase}} is my hero\n  </h2>\n  <button (click)=\"gotoDetail()\">View Details</button>\n</div>\n"
 
 /***/ }),
 
-/***/ 353:
+/***/ 346:
 /***/ (function(module, exports) {
 
 module.exports = "<div *ngIf=\"party1\">\r\n  <h2>{{party.name}} details!</h2>\r\n  <div>\r\n    <label>id: </label>{{party.id}}</div>\r\n  <div>\r\n    <label>name: </label>\r\n    <input [(ngModel)]=\"party.name\" placeholder=\"name\" />\r\n   </div>\r\n  <button (click)=\"goBack()\">Back</button>\r\n  <button (click)=\"save()\">Save</button>\r\n</div>\r\n\r\n<div *ngIf=\"party\" class=\"partyContainer container bootstrap snippet\">\r\n<div class=\"row ng-scope\">\r\n    <div class=\"col-md-4\">\r\n        <div class=\"panel panel-default\">\r\n            <div class=\"panel-body text-center\">\r\n                <div class=\"pv-lg\"><img class=\"center-block img-responsive img-circle img-thumbnail thumb96\" src=\"http://bootdey.com/img/Content/avatar/avatar1.png\" alt=\"Contact\"></div>\r\n                <h3 class=\"m0 text-bold\">{{party.name}}</h3>\r\n                <div class=\"mv-lg\">\r\n                    <p>Hello, I'm a just a dummy contact in your contact list and this is my presentation text. Have fun!</p>\r\n                </div>\r\n                <div class=\"text-center\"><a class=\"btn btn-primary\" href=\"\">Send message</a></div>\r\n            </div>\r\n        </div>\r\n        <div class=\"panel panel-default hidden-xs hidden-sm\">\r\n            <div class=\"panel-heading\">\r\n                <div class=\"panel-title text-center\">Related contacts</div>\r\n            </div>\r\n            <div class=\"panel-body\">\r\n                <div class=\"media\">\r\n                    <div class=\"media-left media-middle\">\r\n                        <a href=\"#\"><img class=\"media-object img-circle img-thumbnail thumb48\" src=\"http://bootdey.com/img/Content/avatar/avatar2.png\" alt=\"Contact\"></a>\r\n                    </div>\r\n                    <div class=\"media-body pt-sm\">\r\n                        <div class=\"text-bold\">Floyd Ortiz\r\n                            <div class=\"text-sm text-muted\">12m ago</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"media\">\r\n                    <div class=\"media-left media-middle\">\r\n                        <a href=\"#\"><img class=\"media-object img-circle img-thumbnail thumb48\" src=\"http://bootdey.com/img/Content/avatar/avatar3.png\" alt=\"Contact\"></a>\r\n                    </div>\r\n                    <div class=\"media-body pt-sm\">\r\n                        <div class=\"text-bold\">Luis Vasquez\r\n                            <div class=\"text-sm text-muted\">2h ago</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"media\">\r\n                    <div class=\"media-left media-middle\">\r\n                        <a href=\"#\"><img class=\"media-object img-circle img-thumbnail thumb48\" src=\"http://bootdey.com/img/Content/avatar/avatar4.png\" alt=\"Contact\"></a>\r\n                    </div>\r\n                    <div class=\"media-body pt-sm\">\r\n                        <div class=\"text-bold\">Duane Mckinney\r\n                            <div class=\"text-sm text-muted\">yesterday</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"media\">\r\n                    <div class=\"media-left media-middle\">\r\n                        <a href=\"#\"><img class=\"media-object img-circle img-thumbnail thumb48\" src=\"http://bootdey.com/img/Content/avatar/avatar5.png\" alt=\"Contact\"></a>\r\n                    </div>\r\n                    <div class=\"media-body pt-sm\">\r\n                        <div class=\"text-bold\">Connie Lambert\r\n                            <div class=\"text-sm text-muted\">2 weeks ago</div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"col-md-8\">\r\n        <div class=\"panel panel-default\">\r\n            <div class=\"panel-body\">\r\n                <div class=\"pull-right\">\r\n                    <div class=\"btn-group dropdown\" uib-dropdown=\"dropdown\">\r\n                        <button class=\"btn btn-link dropdown-toggle\" uib-dropdown-toggle=\"\" aria-haspopup=\"true\" aria-expanded=\"false\"><em class=\"fa fa-ellipsis-v fa-lg text-muted\"></em></button>\r\n                        <ul class=\"dropdown-menu dropdown-menu-right animated fadeInLeft\" role=\"menu\">\r\n                            <li><a href=\"\"><span>Send by message</span></a></li>\r\n                            <li><a href=\"\"><span>Share contact</span></a></li>\r\n                            <li><a href=\"\"><span>Block contact</span></a></li>\r\n                            <li><a href=\"\"><span class=\"text-warning\">Delete contact</span></a></li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n                <div class=\"h4 text-center\">Contact Information</div>\r\n                <div class=\"row pv-lg\">\r\n                    <div class=\"col-lg-2\"></div>\r\n                    <div class=\"col-lg-8\">\r\n                        <form class=\"form-horizontal ng-pristine ng-valid\">\r\n                            <div class=\"form-group\">\r\n                                <label class=\"col-sm-2 control-label\" for=\"inputContact1\">Name</label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <input [(ngModel)]=\"party.name\" name=\"name\" class=\"form-control\" placeholder=\"\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label class=\"col-sm-2 control-label\" for=\"inputContact2\">Email</label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <input class=\"form-control\" id=\"inputContact2\" type=\"email\" value=\"mail@example.com\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label class=\"col-sm-2 control-label\" for=\"inputContact3\">Phone</label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <input class=\"form-control\" id=\"inputContact3\" type=\"text\" value=\"(123) 465 789\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label class=\"col-sm-2 control-label\" for=\"inputContact4\">Mobile</label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <input class=\"form-control\" id=\"inputContact4\" type=\"text\" value=\"(12) 123 987 465\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label class=\"col-sm-2 control-label\" for=\"inputContact5\">Website</label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <input class=\"form-control\" id=\"inputContact5\" type=\"text\" value=\"http://some.wesbite.com\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label class=\"col-sm-2 control-label\" for=\"inputContact6\">Address</label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <textarea class=\"form-control\" id=\"inputContact6\" row=\"4\">Some nice Street, 1234</textarea>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label class=\"col-sm-2 control-label\" for=\"inputContact7\">Social</label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <input class=\"form-control\" id=\"inputContact7\" type=\"text\" value=\"@Social\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label class=\"col-sm-2 control-label\" for=\"inputContact8\">Company</label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <input class=\"form-control\" id=\"inputContact8\" type=\"text\" placeholder=\"No Company\">\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <div class=\"col-sm-offset-2 col-sm-10\">\r\n                                    <div class=\"checkbox\">\r\n                                        <label>\r\n                                            <input type=\"checkbox\"> Favorite contact?</label>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <div class=\"col-sm-offset-2 col-sm-10\">\r\n                                    <button class=\"btn btn-info\" type=\"submit\">Update</button>\r\n                                </div>\r\n                            </div>\r\n                        </form>\r\n                        <div class=\"text-right\"><a class=\"text-muted\" href=\"#\">Delete this contact?</a></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n</div>\r\n"
 
 /***/ }),
 
-/***/ 354:
+/***/ 347:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row teamContainer\">\r\n<div class=\"col-md-12\">\r\n    <div class=\"page-people-directory\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <h5 class=\"page-title\"><b>Contacts</b></h5>\r\n                <ul class=\"nav nav-pills nav-stacked nav-contacts\">\r\n                    <li class=\"active\">\r\n                        <a href=\"#\">\r\n                            All Contacts\r\n                            <span class=\"badge pull-right\">128+</span>\r\n                        </a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"#\">\r\n                            Jade\r\n                            <span class=\"badge pull-right\">87</span>\r\n                        </a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"#\">\r\n                            Informatica\r\n                            <span class=\"badge pull-right\">87</span>\r\n                        </a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"#\">\r\n                            Mainframe\r\n                            <span class=\"badge pull-right\">10</span>\r\n                        </a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"#\">\r\n                            Saffire\r\n                            <span class=\"badge pull-right\">65</span>\r\n                        </a>\r\n                    </li>\r\n                     <li>\r\n                        <a href=\"#\">\r\n                            Java Others\r\n                            <span class=\"badge pull-right\">65</span>\r\n                        </a>\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"#\">\r\n                            Thunderhead\r\n                            <span class=\"badge pull-right\">65</span>\r\n                        </a>\r\n                    </li>\r\n                </ul>\r\n                \r\n                <br>\r\n                <!--\r\n                <h5><b>My Favorites</b></h5>\r\n                <div class=\"list-group people-group\">\r\n                    <a href=\"#\" class=\"list-group-item\">\r\n                        <div class=\"media\">\r\n                            <div class=\"pull-left\">\r\n                                <img class=\"img-circle\" src=\"http://bootdey.com/img/Content/avatar/avatar1.png\" alt=\"...\">\r\n                            </div>\r\n                            <div class=\"media-body\">\r\n                                <h4 class=\"media-heading\">John Wayne</h4>\r\n                                <small>Software Engineer</small>\r\n                            </div>\r\n                        </div>\r\n                    </a>\r\n                    <a href=\"#\" class=\"list-group-item\">\r\n                        <div class=\"media\">\r\n                            <div class=\"pull-left\">\r\n                                <img class=\"img-circle\" src=\"http://bootdey.com/img/Content/avatar/avatar2.png\" alt=\"...\">\r\n                            </div>\r\n                            <div class=\"media-body\">\r\n                                <h4 class=\"media-heading\">Jane Dane</h4>\r\n                                <small>Software Engineer</small>\r\n                            </div>\r\n                        </div>\r\n                    </a>\r\n                    <a href=\"#\" class=\"list-group-item\">\r\n                        <div class=\"media\">\r\n                            <div class=\"pull-left\">\r\n                                <img class=\"img-circle\" src=\"http://bootdey.com/img/Content/avatar/avatar3.png\" alt=\"...\">\r\n                            </div>\r\n                            <div class=\"media-body\">\r\n                                <h4 class=\"media-heading\">Juan Dela Cruz</h4>\r\n                                <small>Software Engineer</small>\r\n                            </div>\r\n                        </div>\r\n                    </a>\r\n                    <a href=\"#\" class=\"list-group-item\">\r\n                        <div class=\"media\">\r\n                            <div class=\"pull-left\">\r\n                                <img class=\"img-circle\" src=\"http://bootdey.com/img/Content/avatar/avatar4.png\" alt=\"...\">\r\n                            </div>\r\n                            <div class=\"media-body\">\r\n                                <h4 class=\"media-heading\">Jose Cruz</h4>\r\n                                <small>Software Engineer</small>\r\n                            </div>\r\n                        </div>\r\n                    </a>\r\n                </div>\r\n                -->\r\n            </div>\r\n            <div class=\"col-md-9\">\r\n                <div class=\"well\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-9\">\r\n                            <input type=\"text\" placeholder=\"Search people\" class=\"form-control\">\r\n                        </div>\r\n                        <div class=\"col-md-3\">\r\n                            <div class=\"btn-group\" style=\"display:block\">\r\n                              <button data-toggle=\"dropdown\" class=\"btn btn-default dropdown-toggle\" style=\"width: 100%; border-radius: 0px; background: white;  color: gray; border-color: #ddd;\">Last 10 days <span class=\"caret\"></span></button>\r\n                              <ul class=\"dropdown-menu bullet pull-right animated pulse margin-top-45\">\r\n                                <li>\r\n                                  <input type=\"radio\" id=\"ex1_1\" name=\"ex1\" value=\"1\" checked=\"\">\r\n                                  <label for=\"ex1_1\">Fullname</label>\r\n                                </li>\r\n                                <li>\r\n                                  <input type=\"radio\" id=\"ex1_2\" name=\"ex1\" value=\"2\">\r\n                                  <label for=\"ex1_2\">Company</label>\r\n                                </li>\r\n                                <li>\r\n                                  <input type=\"radio\" id=\"ex1_3\" name=\"ex1\" value=\"3\">\r\n                                  <label for=\"ex1_3\">Position</label>\r\n                                </li>\r\n                              </ul>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <br>\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-6\">\r\n                        <h3>All Contacts</h3>\r\n                    </div>\r\n                    <div class=\"col-md-6\">\r\n                         <button type=\"button\" class=\"btn btn-green btn-raised btn-add-new-contact\"><span class=\"icon-plus\" data-toggle=\"modal\" data-target=\"#modal-pull-right-add\"> Add New Contact</span></button>\r\n                    </div>\r\n                </div>\r\n                \r\n                <div class=\"list-group contact-group\">\r\n                    <a *ngFor=\"let party of parties\" [routerLink]=\"['/detail', party.id]\"  class=\"list-group-item\">\r\n                        <div class=\"media\">\r\n                            <div class=\"pull-left\">\r\n                                <img class=\"img-circle\" src=\"http://bootdey.com/img/Content/avatar/avatar1.png\" width=\"150\" alt=\"...\">\r\n                            </div>\r\n                            <div class=\"media-body\">\r\n                                <h4 class=\"media-heading\">{{party.name}} <small>Software Engineer at Facebook, Inc.</small></h4>\r\n                                <div class=\"media-content\">\r\n                                    <i class=\"fa fa-map-marker\"></i> San Francisco, California, United States\r\n                                    <ul class=\"list-unstyled\">\r\n                                        <li><i class=\"fa fa-skype\"></i> jdoe.doe</li>\r\n                                        <li><i class=\"fa fa-mobile\"></i> +63 912 212 2451</li>\r\n                                        <li><i class=\"fa fa-envelope-o\"></i> joedoe@email.com</li>\r\n                                    </ul>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </a>\r\n                </div>\r\n                <div class=\"pull-right\">\r\n                    <ul class=\"pagination pagination-split pagination-sm pagination-contact\">\r\n                        <li class=\"disabled\"><a href=\"#\"><i class=\"fa fa-angle-left\"></i></a></li>\r\n                        <li class=\"active\"><a href=\"#\">1</a></li>\r\n                        <li><a href=\"#\">2</a></li>\r\n                        <li><a href=\"#\">3</a></li>\r\n                        <li><a href=\"#\">4</a></li>\r\n                        <li><a href=\"#\">5</a></li>\r\n                        <li><a href=\"#\"><i class=\"fa fa-angle-right\"></i></a></li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"modal modal-pull-right\" data-easein=\"fadeInRight\" data-easeout=\"fadeOutRight\" id=\"modal-pull-right-add\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\" style=\"display: none;\">\r\n            <div class=\"modal-dialog\">\r\n                <div class=\"modal-content animated fadeOutRight\">\r\n                    <div class=\"modal-body\">\r\n                        <div class=\"row modal-close\">\r\n                            <div class=\"col-md-12 padding-bottom-8 padding-top-8 bg-silver\">\r\n                                <h4 class=\"pull-left\"><b>Create New Contact</b></h4>\r\n                                <ul class=\"list-unstyled list-inline text-right\">\r\n                                    <li class=\"close-right-modal\"><span class=\"fa fa-times fa-2x\" data-dismiss=\"modal\"></span></li>\r\n                                </ul>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-12\">\r\n                                <div class=\"contact-add-content\">\r\n                                    <form class=\"form-horizontal tabular-form margin-top-10\">\r\n                                        <div class=\"form-group\">\r\n                                            <label for=\"name\" class=\"col-sm-2 control-label\">Name</label>\r\n                                            <div class=\"col-sm-10 tabular-border\">\r\n                                                <input type=\"text\" class=\"form-control\" id=\"name\" placeholder=\"Full Name\">\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"form-group\">\r\n                                            <label for=\"email\" class=\"col-sm-2 control-label\">Email</label>\r\n                                            <div class=\"col-sm-10 tabular-border\">\r\n                                                <input type=\"text\" class=\"form-control\" id=\"email\" placeholder=\"Email\">\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"form-group\">\r\n                                            <label for=\"phone\" class=\"col-sm-2 control-label\">Phone</label>\r\n                                            <div class=\"col-sm-10 tabular-border\">\r\n                                                <input type=\"text\" class=\"form-control\" id=\"phone\" placeholder=\"Phone\">\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"form-group\">\r\n                                            <label for=\"address\" class=\"col-sm-2 control-label\">Address</label>\r\n                                            <div class=\"col-sm-10 tabular-border\">\r\n                                                <input type=\"text\" class=\"form-control\" id=\"address\" placeholder=\"Address\">\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"form-actions\">\r\n                                            <button type=\"button\" class=\"btn btn-silver btn-flat\">Cancel</button> <button type=\"button\" class=\"btn btn-green btn-flat\">Save Changes</button>\r\n                                        </div>\r\n                                    </form>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n</div>"
+module.exports = "<div class=\"row teamContainer\">\r\n<div class=\"col-md-12\">\r\n    <div class=\"page-people-directory\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <h5 class=\"page-title\"><b>Contacts</b></h5>\r\n                <ul class=\"nav nav-pills nav-stacked nav-contacts\">\r\n                    <li class=\"active\">\r\n                        <a href=\"#\">\r\n                            All Contacts\r\n                            <span class=\"badge pull-right\">128+</span>\r\n                        </a>\r\n                    </li>\r\n                    \r\n                    <li *ngFor=\"let summary of partySummary\">\r\n                            <a>\r\n                                    {{summary.TeamName}}\r\n                                    <span class=\"badge pull-right\">{{summary.Count}}</span>\r\n                            </a>\r\n                      </li>\r\n                </ul>\r\n                {{partySummary}}\r\n                <br>\r\n                <!--\r\n                <h5><b>My Favorites</b></h5>\r\n                <div class=\"list-group people-group\">\r\n                    <a href=\"#\" class=\"list-group-item\">\r\n                        <div class=\"media\">\r\n                            <div class=\"pull-left\">\r\n                                <img class=\"img-circle\" src=\"http://bootdey.com/img/Content/avatar/avatar1.png\" alt=\"...\">\r\n                            </div>\r\n                            <div class=\"media-body\">\r\n                                <h4 class=\"media-heading\">John Wayne</h4>\r\n                                <small>Software Engineer</small>\r\n                            </div>\r\n                        </div>\r\n                    </a>\r\n                    <a href=\"#\" class=\"list-group-item\">\r\n                        <div class=\"media\">\r\n                            <div class=\"pull-left\">\r\n                                <img class=\"img-circle\" src=\"http://bootdey.com/img/Content/avatar/avatar2.png\" alt=\"...\">\r\n                            </div>\r\n                            <div class=\"media-body\">\r\n                                <h4 class=\"media-heading\">Jane Dane</h4>\r\n                                <small>Software Engineer</small>\r\n                            </div>\r\n                        </div>\r\n                    </a>\r\n                    <a href=\"#\" class=\"list-group-item\">\r\n                        <div class=\"media\">\r\n                            <div class=\"pull-left\">\r\n                                <img class=\"img-circle\" src=\"http://bootdey.com/img/Content/avatar/avatar3.png\" alt=\"...\">\r\n                            </div>\r\n                            <div class=\"media-body\">\r\n                                <h4 class=\"media-heading\">Juan Dela Cruz</h4>\r\n                                <small>Software Engineer</small>\r\n                            </div>\r\n                        </div>\r\n                    </a>\r\n                    <a href=\"#\" class=\"list-group-item\">\r\n                        <div class=\"media\">\r\n                            <div class=\"pull-left\">\r\n                                <img class=\"img-circle\" src=\"http://bootdey.com/img/Content/avatar/avatar4.png\" alt=\"...\">\r\n                            </div>\r\n                            <div class=\"media-body\">\r\n                                <h4 class=\"media-heading\">Jose Cruz</h4>\r\n                                <small>Software Engineer</small>\r\n                            </div>\r\n                        </div>\r\n                    </a>\r\n                </div>\r\n                -->\r\n            </div>\r\n            <div class=\"col-md-9\">\r\n                <div class=\"well\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-md-9\">\r\n                            <input type=\"text\" placeholder=\"Search people\" class=\"form-control\">\r\n                        </div>\r\n                        <div class=\"col-md-3\">\r\n                            <div class=\"btn-group\" style=\"display:block\">\r\n                              <button data-toggle=\"dropdown\" class=\"btn btn-default dropdown-toggle\" style=\"width: 100%; border-radius: 0px; background: white;  color: gray; border-color: #ddd;\">Last 10 days <span class=\"caret\"></span></button>\r\n                              <ul class=\"dropdown-menu bullet pull-right animated pulse margin-top-45\">\r\n                                <li>\r\n                                  <input type=\"radio\" id=\"ex1_1\" name=\"ex1\" value=\"1\" checked=\"\">\r\n                                  <label for=\"ex1_1\">Fullname</label>\r\n                                </li>\r\n                                <li>\r\n                                  <input type=\"radio\" id=\"ex1_2\" name=\"ex1\" value=\"2\">\r\n                                  <label for=\"ex1_2\">Company</label>\r\n                                </li>\r\n                                <li>\r\n                                  <input type=\"radio\" id=\"ex1_3\" name=\"ex1\" value=\"3\">\r\n                                  <label for=\"ex1_3\">Position</label>\r\n                                </li>\r\n                              </ul>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <br>\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-6\">\r\n                        <h3>All Contacts</h3>\r\n                    </div>\r\n                    <div class=\"col-md-6\">\r\n                         <button type=\"button\" class=\"btn btn-green btn-raised btn-add-new-contact\"><span class=\"icon-plus\" data-toggle=\"modal\" data-target=\"#modal-pull-right-add\"> Add New Contact</span></button>\r\n                    </div>\r\n                </div>\r\n                \r\n                <div class=\"list-group contact-group\">\r\n                    <a *ngFor=\"let party of parties\" [routerLink]=\"['/detail', party.id]\"  class=\"list-group-item\">\r\n                        <div class=\"media\">\r\n                            <div class=\"pull-left\">\r\n                                <img class=\"img-circle\" src=\"http://bootdey.com/img/Content/avatar/avatar1.png\" width=\"150\" alt=\"...\">\r\n                            </div>\r\n                            <div class=\"media-body\">\r\n                                <h4 class=\"media-heading\">{{party.name}} <small>Software Engineer at Facebook, Inc.</small></h4>\r\n                                <div class=\"media-content\">\r\n                                    <i class=\"fa fa-map-marker\"></i> San Francisco, California, United States\r\n                                    <ul class=\"list-unstyled\">\r\n                                        <li><i class=\"fa fa-skype\"></i> jdoe.doe</li>\r\n                                        <li><i class=\"fa fa-mobile\"></i> +63 912 212 2451</li>\r\n                                        <li><i class=\"fa fa-envelope-o\"></i> joedoe@email.com</li>\r\n                                    </ul>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </a>\r\n                </div>\r\n                <div class=\"pull-right\">\r\n                    <ul class=\"pagination pagination-split pagination-sm pagination-contact\">\r\n                        <li class=\"disabled\"><a href=\"#\"><i class=\"fa fa-angle-left\"></i></a></li>\r\n                        <li class=\"active\"><a href=\"#\">1</a></li>\r\n                        <li><a href=\"#\">2</a></li>\r\n                        <li><a href=\"#\">3</a></li>\r\n                        <li><a href=\"#\">4</a></li>\r\n                        <li><a href=\"#\">5</a></li>\r\n                        <li><a href=\"#\"><i class=\"fa fa-angle-right\"></i></a></li>\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"modal modal-pull-right\" data-easein=\"fadeInRight\" data-easeout=\"fadeOutRight\" id=\"modal-pull-right-add\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\" style=\"display: none;\">\r\n            <div class=\"modal-dialog\">\r\n                <div class=\"modal-content animated fadeOutRight\">\r\n                    <div class=\"modal-body\">\r\n                        <div class=\"row modal-close\">\r\n                            <div class=\"col-md-12 padding-bottom-8 padding-top-8 bg-silver\">\r\n                                <h4 class=\"pull-left\"><b>Create New Contact</b></h4>\r\n                                <ul class=\"list-unstyled list-inline text-right\">\r\n                                    <li class=\"close-right-modal\"><span class=\"fa fa-times fa-2x\" data-dismiss=\"modal\"></span></li>\r\n                                </ul>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-12\">\r\n                                <div class=\"contact-add-content\">\r\n                                    <form class=\"form-horizontal tabular-form margin-top-10\">\r\n                                        <div class=\"form-group\">\r\n                                            <label for=\"name\" class=\"col-sm-2 control-label\">Name</label>\r\n                                            <div class=\"col-sm-10 tabular-border\">\r\n                                                <input type=\"text\" class=\"form-control\" id=\"name\" placeholder=\"Full Name\">\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"form-group\">\r\n                                            <label for=\"email\" class=\"col-sm-2 control-label\">Email</label>\r\n                                            <div class=\"col-sm-10 tabular-border\">\r\n                                                <input type=\"text\" class=\"form-control\" id=\"email\" placeholder=\"Email\">\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"form-group\">\r\n                                            <label for=\"phone\" class=\"col-sm-2 control-label\">Phone</label>\r\n                                            <div class=\"col-sm-10 tabular-border\">\r\n                                                <input type=\"text\" class=\"form-control\" id=\"phone\" placeholder=\"Phone\">\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"form-group\">\r\n                                            <label for=\"address\" class=\"col-sm-2 control-label\">Address</label>\r\n                                            <div class=\"col-sm-10 tabular-border\">\r\n                                                <input type=\"text\" class=\"form-control\" id=\"address\" placeholder=\"Address\">\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"form-actions\">\r\n                                            <button type=\"button\" class=\"btn btn-silver btn-flat\">Cancel</button> <button type=\"button\" class=\"btn btn-green btn-flat\">Save Changes</button>\r\n                                        </div>\r\n                                    </form>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n</div>"
 
 /***/ }),
 
-/***/ 355:
+/***/ 348:
 /***/ (function(module, exports) {
 
 module.exports = "    <div class=\"container-fluid workItemContainer\">\r\n        <div id=\"sortableKanbanBoards\" class=\"row\">\r\n            <div class='panel panel-primary kanban-col'>\r\n                <div class=\"panel-heading\">\r\n                    TODO\r\n                    <i class=\"fa fa-2x fa-plus-circle pull-right\"></i>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                    <div class='kanban-centered' [dragula]='\"first-bag\"'>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     <h2><a href=\"#\">Job Meeting</a></h2>\r\n                                    <p>You have a meeting at <strong>Laborator Office</strong> Today.</p>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     <h2><a href=\"#\">Art Ramadani</a> <span>posted a status update</span></h2>\r\n                                     <p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     There's also the possibility of moving elements around in the same container, changing their position\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div> \r\n                </div> \r\n            </div>\r\n            <div class='panel panel-primary kanban-col'>\r\n                <div class=\"panel-heading\">\r\n                    DOING\r\n                    <i class=\"fa fa-2x fa-plus-circle pull-right\"></i>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                    <div class='kanban-centered' [dragula]='\"first-bag\"'>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     There's also the possibility of moving elements around in the same container, changing their position\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     There's also the possibility of moving elements around in the same container, changing their position\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class='panel panel-primary kanban-col'>\r\n                <div class=\"panel-heading\">\r\n                    DONE\r\n                    <i class=\"fa fa-2x fa-plus-circle pull-right\"></i>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                    <div class='kanban-centered' [dragula]='\"first-bag\"'>\r\n                        <div class=\"kanban-entry grab\" *ngFor=\"let workItem of workItems\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     {{workItem.name}}\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n         </div>\r\n    </div>\r\n\r\n\r\n    <!-- Static Modal -->\r\n    <div class=\"modal modal-static fade\" id=\"processing-modal\" role=\"dialog\" aria-hidden=\"true\">\r\n        <div class=\"modal-dialog\">\r\n            <div class=\"modal-content\">\r\n                <div class=\"modal-body\">\r\n                    <div class=\"text-center\">\r\n                        <i class=\"fa fa-refresh fa-5x fa-spin\"></i>\r\n                        <h4>Processing...</h4>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>"
 
 /***/ }),
 
-/***/ 399:
+/***/ 391:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(162);
+module.exports = __webpack_require__(158);
 
 
 /***/ }),
@@ -853,7 +802,7 @@ module.exports = __webpack_require__(162);
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeroService; });
@@ -931,7 +880,7 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PartyService; });
@@ -951,12 +900,20 @@ var PartyService = (function () {
     function PartyService(http) {
         this.http = http;
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
-        this.partiesUrl = 'api/parties'; // URL to web api
+        this.partiesUrl = '/parties'; // URL to web api
+        this.partySummaryURL = '/partySummary';
     }
     PartyService.prototype.getParties = function () {
         return this.http.get(this.partiesUrl)
             .toPromise()
             .then(function (response) { return response.json().data; })
+            .catch(this.handleError);
+    };
+    PartyService.prototype.getPartySummary = function () {
+        alert('about to call party summary');
+        return this.http.get(this.partySummaryURL)
+            .toPromise()
+            .then(function (response) { console.log('from party service ' + response.json()); return response.json(); })
             .catch(this.handleError);
     };
     PartyService.prototype.getParty = function (id) {
@@ -984,7 +941,7 @@ var PartyService = (function () {
             .catch(this.handleError);
     };
     PartyService.prototype.update = function (party) {
-        var url = this.partiesUrl + "/" + party.id;
+        var url = this.partiesUrl + "/" + party.Id;
         return this.http
             .put(url, JSON.stringify(party), { headers: this.headers })
             .toPromise()
@@ -1012,7 +969,7 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(30);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookingsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1065,8 +1022,8 @@ var BookingsComponent = (function () {
 BookingsComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'team-meetings',
-        template: __webpack_require__(349),
-        styles: [__webpack_require__(337)]
+        template: __webpack_require__(342),
+        styles: [__webpack_require__(330)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object])
 ], BookingsComponent);
@@ -1100,17 +1057,16 @@ var DashboardComponent = (function () {
         this.heroes = [];
     }
     DashboardComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.heroService.getHeroes()
-            .then(function (heroes) { return _this.heroes = heroes.slice(1, 5); });
+        //this.heroService.getHeroes()
+        //.then(heroes => this.heroes = heroes.slice(1, 5));
     };
     return DashboardComponent;
 }());
 DashboardComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'my-dashboard',
-        template: __webpack_require__(143),
-        styles: [__webpack_require__(141)]
+        template: __webpack_require__(141),
+        styles: [__webpack_require__(139)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__hero_service__["a" /* HeroService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__hero_service__["a" /* HeroService */]) === "function" && _a || Object])
 ], DashboardComponent);
@@ -1124,11 +1080,11 @@ var _a;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__hero_service__ = __webpack_require__(43);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeroDetailComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1170,8 +1126,8 @@ var HeroDetailComponent = (function () {
 HeroDetailComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
         selector: 'my-hero-detail',
-        template: __webpack_require__(350),
-        styles: [__webpack_require__(338)]
+        template: __webpack_require__(343),
+        styles: [__webpack_require__(331)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__hero_service__["a" /* HeroService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__hero_service__["a" /* HeroService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["e" /* Location */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["e" /* Location */]) === "function" && _c || Object])
 ], HeroDetailComponent);
@@ -1186,7 +1142,7 @@ var _a, _b, _c;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__hero_service__ = __webpack_require__(43);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeroesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1249,8 +1205,8 @@ var HeroesComponent = (function () {
 HeroesComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'my-heroes',
-        template: __webpack_require__(352),
-        styles: [__webpack_require__(340)]
+        template: __webpack_require__(345),
+        styles: [__webpack_require__(333)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__hero_service__["a" /* HeroService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__hero_service__["a" /* HeroService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _b || Object])
 ], HeroesComponent);
@@ -1264,11 +1220,11 @@ var _a, _b;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__party_service__ = __webpack_require__(62);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PartyComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1310,8 +1266,8 @@ var PartyComponent = (function () {
 PartyComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
         selector: 'my-hero-detail',
-        template: __webpack_require__(353),
-        styles: [__webpack_require__(341)]
+        template: __webpack_require__(346),
+        styles: [__webpack_require__(334)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__party_service__["a" /* PartyService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__party_service__["a" /* PartyService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["e" /* Location */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["e" /* Location */]) === "function" && _c || Object])
 ], PartyComponent);
@@ -1343,19 +1299,22 @@ var TeamComponent = (function () {
     function TeamComponent(partyService) {
         this.partyService = partyService;
         this.parties = [];
+        this.partySummary = [];
     }
     TeamComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.partyService.getParties()
-            .then(function (parties) { return _this.parties = parties; });
+        //this.partyService.getParties()
+        //.then(parties => this.parties = parties);
+        this.partyService.getPartySummary()
+            .then(function (partySummary) { _this.partySummary = partySummary; console.log(partySummary); console.log(_this.partySummary); });
     };
     return TeamComponent;
 }());
 TeamComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'my-dashboard',
-        template: __webpack_require__(354),
-        styles: [__webpack_require__(342)]
+        template: __webpack_require__(347),
+        styles: [__webpack_require__(335)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__party_service__["a" /* PartyService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__party_service__["a" /* PartyService */]) === "function" && _a || Object])
 ], TeamComponent);
@@ -1365,5 +1324,5 @@ var _a;
 
 /***/ })
 
-},[399]);
+},[391]);
 //# sourceMappingURL=main.bundle.js.map

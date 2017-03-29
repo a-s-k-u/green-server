@@ -16,11 +16,13 @@
  #*=============================================================================
 "Control reached powershell - setting up a local server/listener"
 #----------------------------------------------------------------
+# $global:projectFolder = 'C:\Users\arun-\Documents\GitHub\green-server\One-Offs\PS-Offwired\Offwired'
 $global:projectFolder = $args[0]
+$global:mainFolder = split-path -parent $MyInvocation.MyCommand.Definition
 'args - 0 is ' + $args[0]
 #----------------------------------------------------------------
 "Including PS Script"
-$scriptPath = [io.path]::combine($pwd,'PSScript.ps1')
+$scriptPath = [io.path]::combine($global:mainFolder,'Offwired.ps1')
 . $scriptPath
 #----------------------------------------------------------------
 
@@ -41,7 +43,9 @@ try{
         $request = $context.Request
         $response = $context.Response
         "Debug: Raw URL " + $request.RawUrl
-
+        if ($request.RawUrl -eq '/'){
+           continue;
+        }
         <#
         $scriptpath = $MyInvocation.MyCommand.Path
         $dir = Split-Path $scriptpath
