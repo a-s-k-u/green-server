@@ -20,18 +20,18 @@ $global:projectFolder = $args[0]
 'args - 0 is ' + $args[0]
 #----------------------------------------------------------------
 "Including PS Script"
-$scriptPath = [io.path]::combine($global:projectFolder,'PSScript.ps1')
+$scriptPath = [io.path]::combine($pwd,'PSScript.ps1')
 . $scriptPath
 #----------------------------------------------------------------
 
 $listener = New-Object Net.HttpListener
-$listener.Prefixes.Add("http://localhost:8081/")
+$listener.Prefixes.Add("http://localhost:8082/")
 "Starting the local server at port 8081"
 $listener.Start()
 "Local server started and server listening to port 8081"
 
 "Opening the browser"
-Start-Process -FilePath "http://localhost:8081/index.html"
+Start-Process -FilePath "http://localhost:8082/index.html"
 "Browser Opened with the url to local server"
 
 try{

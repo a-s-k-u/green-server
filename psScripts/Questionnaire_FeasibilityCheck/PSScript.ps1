@@ -1,5 +1,3 @@
- 
-
 function postCreateNewDimension($dimension)
 {
     $scoreCardPath = [io.path]::combine($global:projectFolder,'DataFolder\scoreCards.csv');
@@ -48,7 +46,6 @@ function postCreateNewDimension($dimension)
     return $csv | ConvertTo-Json
 }
 
-　
 function postUpdateBatch01($score){
         $userID = [Environment]::UserName
         $scoreCardPath = [io.path]::combine($global:projectFolder,'DataFolder\ScoreCards\' + $userID + '.csv');
@@ -144,7 +141,6 @@ function postUpdateBatch02($score){
         return $score | ConvertTo-Json
 }
 
-　
 function postUpdateAllBatches($score){
         $userID = [Environment]::UserName
         $scoreCardPath = [io.path]::combine($global:projectFolder,'DataFolder\ScoreCards\' + $userID + '.csv');
@@ -233,7 +229,6 @@ function postUpdateAllBatches($score){
         return $score | ConvertTo-Json
 }
 
-　
 function postDeleteScore($score){
     $id = $score.scoreID
     Write-Host 'ScoreCardID - ' + $id  
@@ -257,7 +252,6 @@ function postDeleteScore($score){
     return $score | ConvertTo-Json
 }
 
-　
 function getAllScores(){
         $userID = [Environment]::UserName
         $scoreCardPath = [io.path]::combine($global:projectFolder,'DataFolder\ScoreCards\' + $userID + '.csv');
@@ -275,7 +269,6 @@ function getAllScores(){
     
         $scores = Import-Csv -Path $scoreCardPath | group { $_.QuestionnaireID}
 
-　
         $scoreCount = $scores.Length
 
         $scores | foreach-object { 
@@ -446,11 +439,3 @@ function getLeadBoard(){
                                         }
         return $c | ConvertTo-Json
 }
-
-<#
-$JSON = '1'
-$methodName = 'getScore'
-$exp = $methodName + ' $JSON'
-$page = Invoke-Expression $exp
-$page
-#> 
