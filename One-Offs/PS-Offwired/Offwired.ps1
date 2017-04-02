@@ -3,16 +3,116 @@
     $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
     $parties = Import-Csv -Path $userDetailsPath | group Team
 
-    $collectionWithItems = @()
+    $collectionWithItems = New-Object System.Collections.Generic.List[System.Object]
 
     $parties | foreach-object {
-       $collectionWithItems += New-Object psobject -Property @{
+
+        $obj = New-Object psobject -Property @{
                 TeamName = $_.Values[0]
                 Count    = $_.Count
                 }
+        $collectionWithItems.Add($obj);
     }
 
-    return $collectionWithItems | ConvertTo-Json
+    $c = New-Object psobject -Property @{
+        data = $collectionWithItems
+        }
+     
+     return ,$c | ConvertTo-Json
+}
+
+function getParties($team){
+
+    $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
+    #$teamName = '' + [string]$team
+    #$teamName
+    $teamName = $team.Trim();
+    #$teamName
+    $parties = Import-Csv -Path $userDetailsPath | Where-Object {$_.Team -eq $teamName}
+
+    #$collectionWithItems = @(2)
+    $collectionWithItems = New-Object System.Collections.Generic.List[System.Object]
+
+
+    $parties | foreach-object {
+       $obj = New-Object psobject -Property @{
+                Id	      = $_.Id
+                Name      = $_.Name
+               	Team      = $_.Team
+               	Location  = $_.Location
+               	Role      = $_.Role
+                DeskPhone = $_.Deskphone
+                MobPhone  = $_.MobPhone	
+                Email     = $_.Email
+                Gender    = $_.Gender
+                Avatar    = $_.Avatar
+                }
+       $collectionWithItems.Add($obj);
+    }
+
+    return ,$collectionWithItems | ConvertTo-Json
+}
+
+function getProjects(){
+
+    $projectDetailsPath = [io.path]::combine($global:mainFolder,'Data\Team\Project-Details.csv');
+    $projects = Import-Csv -Path $projectDetailsPath
+
+    $collectionWithItems = New-Object System.Collections.Generic.List[System.Object]
+
+
+    $projects | foreach-object {
+       $obj = New-Object psobject -Property @{
+                Id	             = $_.Id
+                Name             = $_.Name
+               	Description      = $_.Description
+               	StartDate        = $_.StartDate
+               	PointsCompleted  = $_.PointsCompleted
+                PointsTotal      = $_.PointsTotal
+                Owner            = $_.Owner	
+                Priority         = $_.Priority
+                Status           = $_.Status
+                }
+       $collectionWithItems.Add($obj);
+    }
+
+    return ,$collectionWithItems | ConvertTo-Json
+}
+
+function getWorkItems(){
+
+    $workItemsPath = [io.path]::combine($global:mainFolder,'Data\Team\Jade-WorkItems.csv');
+    $workItems = Import-Csv -Path $workItemsPath
+
+    $todo  = New-Object System.Collections.Generic.List[System.Object]
+    $doing = New-Object System.Collections.Generic.List[System.Object]
+    $done  = New-Object System.Collections.Generic.List[System.Object]
+
+    $workItems | foreach-object {
+       $obj = New-Object psobject -Property @{
+                Id	        = $_.Id
+                Name        = $_.Name
+               	Status      = $_.Status
+               	Owner       = $_.Owner
+               	StoryPoints = $_.StoryPoints
+                }
+       if ($_.Status -eq 'Doing'){
+          $doing.Add($obj);
+       }elseif ($_.Status -eq 'Done'){
+          $done.Add($obj);
+       }else{
+           $todo.Add($obj);
+       }
+
+    }
+
+    $c = New-Object psobject -Property @{
+        todo   = $todo
+        doing  = $doing
+        done   = $done
+        }
+     
+     return ,$c | ConvertTo-Json
 }
 
 function getAllScores(){
