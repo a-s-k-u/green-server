@@ -5,8 +5,73 @@ webpackJsonp([1,4],{
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__party_service__ = __webpack_require__(62);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeamComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var TeamComponent = (function () {
+    function TeamComponent(partyService) {
+        this.partyService = partyService;
+        this.parties = [];
+        this.partySummary = [];
+        this.selectedParties = [];
+    }
+    TeamComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        //this.partyService.getParties()
+        //.then(parties => this.parties = parties);
+        this.partyService.getPartySummary()
+            .then(function (partySummary) { _this.partySummary = partySummary; });
+        this.partyService.getParties('Jade')
+            .then(function (parties) {
+            _this.selectedParties = parties;
+            _this.selectedTeam = 'Jade';
+        });
+    };
+    TeamComponent.prototype.refreshSelectedSummary = function (team) {
+        var _this = this;
+        team = team.trim();
+        if (!team) {
+            return;
+        }
+        this.partyService.getParties(team)
+            .then(function (parties) {
+            _this.selectedTeam = team;
+            _this.selectedParties = parties;
+        });
+    };
+    return TeamComponent;
+}());
+TeamComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'my-dashboard',
+        template: __webpack_require__(347),
+        styles: [__webpack_require__(336)]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__party_service__["a" /* PartyService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__party_service__["a" /* PartyService */]) === "function" && _a || Object])
+], TeamComponent);
+
+var _a;
+//# sourceMappingURL=team.component.js.map
+
+/***/ }),
+
+/***/ 101:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeamService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -26,7 +91,8 @@ var TeamService = (function () {
         this.http = http;
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
         //private partiesUrl    = 'api/parties';  // URL to web api
-        this.workItemsUrl = '/workItems'; // URL to web api
+        this.workItemsUrl = '/workItems';
+        this.projectUrl = '/projects';
     }
     /*
     getParties(): Promise<Party[]> {
@@ -35,8 +101,14 @@ var TeamService = (function () {
                  .then(response => response.json().data as Party[])
                  .catch(this.handleError);
     }*/
-    TeamService.prototype.getWorkItems = function () {
+    TeamService.prototype.getWorkItems = function (id) {
         return this.http.get(this.workItemsUrl)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    TeamService.prototype.getProjects = function () {
+        return this.http.get(this.projectUrl)
             .toPromise()
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
@@ -94,15 +166,18 @@ var _a;
 
 /***/ }),
 
-/***/ 101:
+/***/ 102:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_dragula_ng2_dragula__ = __webpack_require__(141);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_dragula_ng2_dragula___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_dragula_ng2_dragula__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__team_service__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula__ = __webpack_require__(142);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__team_service__ = __webpack_require__(101);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WorkItemsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -117,13 +192,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
 //import * as $ from 'jquery';
 var WorkItemsComponent = (function () {
-    // public many: Array<string> = ['The', 'possibilities', 'are', 'endless!'];
-    // public many2: Array<string> = ['Explore', 'them'];
-    function WorkItemsComponent(dragulaService, teamService, router) {
+    function WorkItemsComponent(dragulaService, teamService, route, location, router) {
         this.dragulaService = dragulaService;
         this.teamService = teamService;
+        this.route = route;
+        this.location = location;
         this.router = router;
         dragulaService.drop.subscribe(function (value) {
             console.log(value);
@@ -134,14 +212,11 @@ var WorkItemsComponent = (function () {
             console.log(e.attributes.Name);
             //this.onDropModel(value.slice(1));
         });
-        dragulaService.dropModel.subscribe(function (value) { alert('came inside dropModel event'); });
-        /*
-        dragulaService.dropModel.subscribe((value) => {
-          alert('drop model event happened');
-          console.log(value);
-          //console.log(this.workItems[0]);
-      });
-      */
+        dragulaService.dropModel.subscribe(function (value) {
+            alert('drop model event happened');
+            console.log(value);
+            //console.log(this.workItems[0]);
+        });
     }
     /*
      getHeroes(): void {
@@ -171,8 +246,9 @@ var WorkItemsComponent = (function () {
     */
     WorkItemsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.teamService.getWorkItems()
-            .then(function (workStatus) {
+        this.route.params
+            .switchMap(function (params) { return _this.teamService.getWorkItems(params['id']); })
+            .subscribe(function (workStatus) {
             _this.workStatus = workStatus;
             _this.todo = workStatus.todo;
             _this.doing = workStatus.doing;
@@ -182,37 +258,21 @@ var WorkItemsComponent = (function () {
     return WorkItemsComponent;
 }());
 WorkItemsComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        viewProviders: [__WEBPACK_IMPORTED_MODULE_2_ng2_dragula_ng2_dragula__["DragulaService"]],
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Component"])({
+        viewProviders: [__WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula__["DragulaService"]],
         selector: 'my-hero3es',
-        /*template : `
-        <div>
-          <div class='wrapper'>
-            <div class='container' [dragula]='"first-bag"'>
-              <div>You can move these elements between these two containers</div>
-              <div>Moving them anywhere else isn't quite possible</div>
-              <div>There's also the possibility of moving elements around in the same container, changing their position</div>
-            </div>
-            <div class='container' [dragula]='"first-bag"'>
-              <div>This is the default use case. You only need to specify the containers you want to use</div>
-              <div>More interactive use cases lie ahead</div>
-              <div>Make sure to check out the <a href='https://github.com/bevacqua/dragula#readme'>documentation on GitHub!</a></div>
-            </div>
-          </div>
-        </div>
-        `,*/
         template: __webpack_require__(348),
         styles: [__webpack_require__(337)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ng2_dragula_ng2_dragula__["DragulaService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ng2_dragula_ng2_dragula__["DragulaService"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__team_service__["a" /* TeamService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__team_service__["a" /* TeamService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula__["DragulaService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula__["DragulaService"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__team_service__["a" /* TeamService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__team_service__["a" /* TeamService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["d" /* Location */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["d" /* Location */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _e || Object])
 ], WorkItemsComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=work-items.component.js.map
 
 /***/ }),
 
-/***/ 139:
+/***/ 140:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(20)();
@@ -230,7 +290,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 142:
+/***/ 143:
 /***/ (function(module, exports) {
 
 module.exports = "<h3>Top Heroes</h3>\n<div class=\"grid grid-pad\">\n  <a *ngFor=\"let hero of heroes\"  [routerLink]=\"['/detail', hero.id]\"  class=\"col-1-4\">\n    <div class=\"module hero\">\n      <h4>{{hero.name}}</h4>\n    </div>\n  </a>\n</div>\n<hero-search></hero-search>\n\n<div class=\"container bootstrap snippet\">\n    <div class=\"table-responsive\">\n    \t<!-- PROJECT TABLE -->\n    \t<table class=\"table colored-header datatable project-list\">\n    \t\t<thead>\n    \t\t\t<tr>\n    \t\t\t\t<th>Title</th>\n    \t\t\t\t<th>Date Start</th>\n    \t\t\t\t<th>Days to Deadline</th>\n    \t\t\t\t<th>Progress</th>\n    \t\t\t\t<th>Priority</th>\n    \t\t\t\t<th>Leader</th>\n    \t\t\t\t<th>Status</th>\n    \t\t\t</tr>\n    \t\t</thead>\n    \t\t<tbody>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Spot Media</a></td>\n    \t\t\t\t<td>18-05-2014</td>\n    \t\t\t\t<td>12 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"95\" aria-valuenow=\"95\" style=\"width: 95%;\">95%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-warning\">MEDIUM</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar1.png\" alt=\"Avatar\" class=\"avatar img-circle\"> <a href=\"#\">Michael</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">E-Commerce Site</a></td>\n    \t\t\t\t<td>24-05-2014</td>\n    \t\t\t\t<td>30 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"40\" aria-valuenow=\"40\" style=\"width: 40%;\">40%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-success\">LOW</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar2.png\" alt=\"Avatar\" class=\"avatar img-circle\"> <a href=\"#\">Antonius</a></td>\n    \t\t\t\t<td><span class=\"label label-warning\">PENDING</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Project 123GO</a></td>\n    \t\t\t\t<td>20-09-2014</td>\n    \t\t\t\t<td>50 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"65\" aria-valuenow=\"65\" style=\"width: 65%;\">65%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-danger\">HIGH</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar3.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Antonius</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Wordpress Theme</a></td>\n    \t\t\t\t<td>05-10-2014</td>\n    \t\t\t\t<td>40 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"77\" aria-valuenow=\"77\" style=\"width: 77%;\">77%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-warning\">MEDIUM</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar4.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Michael</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Redesign Landing Page</a></td>\n    \t\t\t\t<td>15-11-2014</td>\n    \t\t\t\t<td>30 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"25\" aria-valuenow=\"25\" style=\"width: 25%;\">25%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-success\">LOW</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar4.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Jason</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Wordpress Theme</a></td>\n    \t\t\t\t<td>05-10-2014</td>\n    \t\t\t\t<td>N/A</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar progress-bar-default\" data-transitiongoal=\"100\" aria-valuenow=\"100\" style=\"width: 100%;\">100%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-default\">MEDIUM</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar6.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Michael</a></td>\n    \t\t\t\t<td><span class=\"label label-default\">CLOSED</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Redesign Landing Page</a></td>\n    \t\t\t\t<td>15-11-2014</td>\n    \t\t\t\t<td>30 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"33\" aria-valuenow=\"33\" style=\"width: 33%;\">33%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-success\">LOW</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar7.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Jason</a></td>\n    \t\t\t\t<td><span class=\"label label-warning\">PENDING</span></td>\n    \t\t\t</tr>\n    \t\t</tbody>\n    \t</table>\n    \t<!-- END PROJECT TABLE -->\n    </div>\n</div>\n"
@@ -277,14 +337,14 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dashboard_component__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__heroes_component__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__hero_detail_component__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__team_component__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__party_component__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__bookings_component__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__work_items_component__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dashboard_component__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__heroes_component__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__hero_detail_component__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__team_component__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__party_component__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__bookings_component__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__work_items_component__ = __webpack_require__(102);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -308,7 +368,7 @@ var routes = [
     { path: 'heroes', component: __WEBPACK_IMPORTED_MODULE_3__heroes_component__["a" /* HeroesComponent */] },
     { path: 'team', component: __WEBPACK_IMPORTED_MODULE_5__team_component__["a" /* TeamComponent */] },
     { path: 'party', component: __WEBPACK_IMPORTED_MODULE_6__party_component__["a" /* PartyComponent */] },
-    { path: 'workItems', component: __WEBPACK_IMPORTED_MODULE_8__work_items_component__["a" /* WorkItemsComponent */] },
+    { path: 'workItems/:id', component: __WEBPACK_IMPORTED_MODULE_8__work_items_component__["a" /* WorkItemsComponent */] },
     { path: 'meetingRooms', component: __WEBPACK_IMPORTED_MODULE_7__bookings_component__["a" /* BookingsComponent */] }
 ];
 var AppRoutingModule = (function () {
@@ -367,19 +427,19 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_routing_module__ = __webpack_require__(165);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dashboard_component__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__heroes_component__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__hero_detail_component__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dashboard_component__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__heroes_component__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__hero_detail_component__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__hero_service__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__party_service__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__team_service__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__team_service__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__hero_search_component__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__training_component__ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__team_component__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__party_component__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__bookings_component__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__work_items_component__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_ng2_dragula_ng2_dragula__ = __webpack_require__(141);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__team_component__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__party_component__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__bookings_component__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__work_items_component__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_ng2_dragula_ng2_dragula__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_ng2_dragula_ng2_dragula___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18_ng2_dragula_ng2_dragula__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -451,10 +511,10 @@ AppModule = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_of__ = __webpack_require__(354);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_observable_of__);
@@ -523,7 +583,7 @@ HeroSearchComponent = __decorate([
         styles: [__webpack_require__(333)],
         providers: [__WEBPACK_IMPORTED_MODULE_8__hero_search_service__["a" /* HeroSearchService */]]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_8__hero_search_service__["a" /* HeroSearchService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__hero_search_service__["a" /* HeroSearchService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_8__hero_search_service__["a" /* HeroSearchService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__hero_search_service__["a" /* HeroSearchService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _b || Object])
 ], HeroSearchComponent);
 
 var _a, _b;
@@ -606,8 +666,8 @@ var TrainingComponent = (function () {
 TrainingComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'my-dashboard',
-        template: __webpack_require__(142),
-        styles: [__webpack_require__(139)]
+        template: __webpack_require__(143),
+        styles: [__webpack_require__(140)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__hero_service__["a" /* HeroService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__hero_service__["a" /* HeroService */]) === "function" && _a || Object])
 ], TrainingComponent);
@@ -763,7 +823,7 @@ module.exports = module.exports.toString();
 /***/ 341:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Navigation -->\r\n<nav class=\"navbar navbar-default navbar-fixed-top\" role=\"navigation\">\r\n        <div class=\"container\">\r\n            <!-- Brand and toggle get grouped for better mobile display -->\r\n            <div class=\"navbar-header\">\r\n\t\t\t\t<a href=\"#\" class=\"navbar-left\"><img src=\"https://upload.wikimedia.org/wikipedia/commons/f/fc/Logo_Allianz.png\" style=\"max-width:100px; margin-top: -7px;\"></a>\r\n                <a class=\"navbar-brand\" routerLink=\"/dashboard\" routerLinkActive=\"active\">Dashboard</a>\r\n                <a class=\"navbar-brand\" routerLink=\"/team\" routerLinkActive=\"active\">Team</a>\r\n                 <a class=\"navbar-brand\" routerLink=\"/party\" routerLinkActive=\"active\">My Profile</a>\r\n                <!--<a class=\"navbar-brand\" routerLink=\"/heroes\" routerLinkActive=\"active\">Calendar</a>-->\r\n                <a class=\"navbar-brand\" routerLink=\"/workItems\" routerLinkActive=\"active\">Tasks</a>\r\n                <a class=\"navbar-brand\" routerLink=\"/meetingRooms\" routerLinkActive=\"active\">Meetings</a>\r\n            </div>\r\n        </div>\r\n        <!-- /.container -->\r\n</nav>\r\n<div class=\"container\">\r\n    <router-outlet></router-outlet>\r\n</div>"
+module.exports = "<!-- Navigation -->\r\n<nav class=\"navbar navbar-default navbar-fixed-top\" role=\"navigation\">\r\n        <div class=\"container\">\r\n            <!-- Brand and toggle get grouped for better mobile display -->\r\n            <div class=\"navbar-header\">\r\n              <ul class=\"nav navbar-nav\">\r\n\t\t\t\t<li><a href=\"#\" class=\"navbar-left\"><img src=\"https://upload.wikimedia.org/wikipedia/commons/f/fc/Logo_Allianz.png\" style=\"max-width:20px; margin-top: -7px;\"></a></li>\r\n                <li><a class=\"navbar-brand\" routerLink=\"/dashboard\" routerLinkActive=\"active\">Dashboard</a></li>\r\n                <li><a class=\"navbar-brand\" routerLink=\"/team\" routerLinkActive=\"active\">Team</a></li>\r\n                 <li><a class=\"navbar-brand\" routerLink=\"/party\" routerLinkActive=\"active\">My Profile</a></li>\r\n                <!--<a class=\"navbar-brand\" routerLink=\"/heroes\" routerLinkActive=\"active\">Calendar</a>-->\r\n                <li><a class=\"navbar-brand\" routerLink=\"/workItems/Jade\" routerLinkActive=\"active\">Tasks</a></li>\r\n                <li><a class=\"navbar-brand\" routerLink=\"/meetingRooms\" routerLinkActive=\"active\">Meetings</a></li>\r\n              </ul>\r\n            </div>\r\n        </div>\r\n        <!-- /.container -->\r\n</nav>\r\n<div class=\"container\">\r\n    <router-outlet></router-outlet>\r\n</div>"
 
 /***/ }),
 
@@ -830,7 +890,7 @@ module.exports = __webpack_require__(159);
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeroService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -908,7 +968,7 @@ var _a;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PartyService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -991,12 +1051,12 @@ var _a;
 
 /***/ }),
 
-/***/ 94:
+/***/ 95:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(27);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BookingsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1052,7 +1112,7 @@ BookingsComponent = __decorate([
         template: __webpack_require__(342),
         styles: [__webpack_require__(331)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object])
 ], BookingsComponent);
 
 var _a;
@@ -1060,7 +1120,7 @@ var _a;
 
 /***/ }),
 
-/***/ 95:
+/***/ 96:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1092,8 +1152,8 @@ var DashboardComponent = (function () {
 DashboardComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'my-dashboard',
-        template: __webpack_require__(142),
-        styles: [__webpack_require__(139)]
+        template: __webpack_require__(143),
+        styles: [__webpack_require__(140)]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__hero_service__["a" /* HeroService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__hero_service__["a" /* HeroService */]) === "function" && _a || Object])
 ], DashboardComponent);
@@ -1103,15 +1163,15 @@ var _a;
 
 /***/ }),
 
-/***/ 96:
+/***/ 97:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__hero_service__ = __webpack_require__(43);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeroDetailComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1156,7 +1216,7 @@ HeroDetailComponent = __decorate([
         template: __webpack_require__(343),
         styles: [__webpack_require__(332)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__hero_service__["a" /* HeroService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__hero_service__["a" /* HeroService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["e" /* Location */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["e" /* Location */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__hero_service__["a" /* HeroService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__hero_service__["a" /* HeroService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["d" /* Location */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["d" /* Location */]) === "function" && _c || Object])
 ], HeroDetailComponent);
 
 var _a, _b, _c;
@@ -1164,12 +1224,12 @@ var _a, _b, _c;
 
 /***/ }),
 
-/***/ 97:
+/***/ 98:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__hero_service__ = __webpack_require__(43);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeroesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1235,7 +1295,7 @@ HeroesComponent = __decorate([
         template: __webpack_require__(345),
         styles: [__webpack_require__(334)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__hero_service__["a" /* HeroService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__hero_service__["a" /* HeroService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__hero_service__["a" /* HeroService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__hero_service__["a" /* HeroService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _b || Object])
 ], HeroesComponent);
 
 var _a, _b;
@@ -1243,15 +1303,15 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 98:
+/***/ 99:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_add_operator_switchMap__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__party_service__ = __webpack_require__(62);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PartyComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1296,76 +1356,11 @@ PartyComponent = __decorate([
         template: __webpack_require__(346),
         styles: [__webpack_require__(335)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__party_service__["a" /* PartyService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__party_service__["a" /* PartyService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["e" /* Location */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["e" /* Location */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__party_service__["a" /* PartyService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__party_service__["a" /* PartyService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_common__["d" /* Location */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_common__["d" /* Location */]) === "function" && _c || Object])
 ], PartyComponent);
 
 var _a, _b, _c;
 //# sourceMappingURL=party.component.js.map
-
-/***/ }),
-
-/***/ 99:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__party_service__ = __webpack_require__(62);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeamComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var TeamComponent = (function () {
-    function TeamComponent(partyService) {
-        this.partyService = partyService;
-        this.parties = [];
-        this.partySummary = [];
-        this.selectedParties = [];
-    }
-    TeamComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        //this.partyService.getParties()
-        //.then(parties => this.parties = parties);
-        this.partyService.getPartySummary()
-            .then(function (partySummary) { _this.partySummary = partySummary; });
-        this.partyService.getParties('Jade')
-            .then(function (parties) {
-            _this.selectedParties = parties;
-            _this.selectedTeam = 'Jade';
-        });
-    };
-    TeamComponent.prototype.refreshSelectedSummary = function (team) {
-        var _this = this;
-        team = team.trim();
-        if (!team) {
-            return;
-        }
-        this.partyService.getParties(team)
-            .then(function (parties) {
-            _this.selectedTeam = team;
-            _this.selectedParties = parties;
-        });
-    };
-    return TeamComponent;
-}());
-TeamComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'my-dashboard',
-        template: __webpack_require__(347),
-        styles: [__webpack_require__(336)]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__party_service__["a" /* PartyService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__party_service__["a" /* PartyService */]) === "function" && _a || Object])
-], TeamComponent);
-
-var _a;
-//# sourceMappingURL=team.component.js.map
 
 /***/ })
 
