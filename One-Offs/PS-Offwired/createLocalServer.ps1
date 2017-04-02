@@ -71,6 +71,15 @@ try{
             $page = ''
             $response.Headers.Add("Content-Type","text/html")
         }
+        elseif($request.RawUrl -Match ".png"){
+            $pngPath = [io.path]::combine($global:projectFolder,$request.RawUrl.TrimStart("/"))
+            #$page = [convert]::ToBase64String((get-content $pngPath -encoding byte))
+            $response.Headers.Add("Content-Type","image/png")
+            $buffer = (get-content $pngPath -encoding byte)
+            $response.ContentLength64 = $buffer.Length
+            $response.OutputStream.Write($buffer,0,$buffer.Length)
+            $response.Close()
+        }
         elseif($request.HttpMethod.ToUpper() -eq 'GET'){
             $paramCount =  $request.Url.Segments.Count - 2
             Write-Host $request.Url.Segments;
@@ -85,9 +94,16 @@ try{
             $methodName = $request.HttpMethod + $request.Url.Segments[1].TrimEnd('/')
             $JSON = $args
             $exp = $methodName + ' $JSON'
-            $page = Invoke-Expression $exp
+            try{
+                $page = Invoke-Expression $exp
+                $response.Headers.Add("Content-Type","application/json")
+            }catch{
+                Write-Host $_.Exception.Message
+                $pagePath = [io.path]::combine($global:projectFolder,'index.html') 
+                $page = Get-Content -Path ($pagePath) -Raw
+                $response.Headers.Add("Content-Type","text/html")
+            }
             #$page = &($methodName + $args)
-            $response.Headers.Add("Content-Type","application/json")
         }
         elseif($request.HttpMethod.ToUpper() -eq 'POST'){
              $StreamReader = New-Object System.IO.StreamReader $request.InputStream
