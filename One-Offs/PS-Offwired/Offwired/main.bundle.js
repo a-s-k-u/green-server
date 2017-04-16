@@ -9,7 +9,7 @@ webpackJsonp([1,4],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__party_service__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__party_service__ = __webpack_require__(63);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PartyComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -66,7 +66,7 @@ var _a, _b, _c;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__party_service__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__party_service__ = __webpack_require__(63);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeamComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -137,7 +137,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__team_service__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__team_service__ = __webpack_require__(53);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WorkItemsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -178,6 +178,25 @@ var WorkItemsComponent = (function () {
             //console.log(this.workItems[0]);
         });
     }
+    WorkItemsComponent.prototype.fetchData = function () {
+        var _this = this;
+        this.route.params
+            .switchMap(function (params) { return _this.teamService.getWorkItems(params['id']); })
+            .subscribe(function (workStatus) {
+            _this.workStatus = workStatus;
+            _this.todo = workStatus.todo;
+            _this.doing = workStatus.doing;
+            _this.done = workStatus.done;
+        });
+    };
+    WorkItemsComponent.prototype.moveToInProgress = function (workItem) {
+        var _this = this;
+        this.teamService
+            .moveToInprogress(workItem.Name)
+            .then(function () {
+            _this.fetchData();
+        });
+    };
     /*
      getHeroes(): void {
        this.teamService
@@ -205,15 +224,7 @@ var WorkItemsComponent = (function () {
      }
     */
     WorkItemsComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.route.params
-            .switchMap(function (params) { return _this.teamService.getWorkItems(params['id']); })
-            .subscribe(function (workStatus) {
-            _this.workStatus = workStatus;
-            _this.todo = workStatus.todo;
-            _this.doing = workStatus.doing;
-            _this.done = workStatus.done;
-        });
+        this.fetchData();
     };
     return WorkItemsComponent;
 }());
@@ -253,7 +264,7 @@ module.exports = module.exports.toString();
 /***/ 143:
 /***/ (function(module, exports) {
 
-module.exports = "<h3>Top Heroes</h3>\n<div class=\"grid grid-pad\">\n  <a *ngFor=\"let hero of heroes\"  [routerLink]=\"['/detail', hero.id]\"  class=\"col-1-4\">\n    <div class=\"module hero\">\n      <h4>{{hero.name}}</h4>\n    </div>\n  </a>\n</div>\n<hero-search></hero-search>\n\n<div class=\"container bootstrap snippet\">\n    <div class=\"table-responsive\">\n    \t<!-- PROJECT TABLE -->\n    \t<table class=\"table colored-header datatable project-list\">\n    \t\t<thead>\n    \t\t\t<tr>\n    \t\t\t\t<th>Title</th>\n    \t\t\t\t<th>Date Start</th>\n    \t\t\t\t<th>Days to Deadline</th>\n    \t\t\t\t<th>Progress</th>\n    \t\t\t\t<th>Priority</th>\n    \t\t\t\t<th>Leader</th>\n    \t\t\t\t<th>Status</th>\n    \t\t\t</tr>\n    \t\t</thead>\n    \t\t<tbody>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Spot Media</a></td>\n    \t\t\t\t<td>18-05-2014</td>\n    \t\t\t\t<td>12 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"95\" aria-valuenow=\"95\" style=\"width: 95%;\">95%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-warning\">MEDIUM</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar1.png\" alt=\"Avatar\" class=\"avatar img-circle\"> <a href=\"#\">Michael</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">E-Commerce Site</a></td>\n    \t\t\t\t<td>24-05-2014</td>\n    \t\t\t\t<td>30 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"40\" aria-valuenow=\"40\" style=\"width: 40%;\">40%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-success\">LOW</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar2.png\" alt=\"Avatar\" class=\"avatar img-circle\"> <a href=\"#\">Antonius</a></td>\n    \t\t\t\t<td><span class=\"label label-warning\">PENDING</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Project 123GO</a></td>\n    \t\t\t\t<td>20-09-2014</td>\n    \t\t\t\t<td>50 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"65\" aria-valuenow=\"65\" style=\"width: 65%;\">65%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-danger\">HIGH</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar3.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Antonius</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Wordpress Theme</a></td>\n    \t\t\t\t<td>05-10-2014</td>\n    \t\t\t\t<td>40 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"77\" aria-valuenow=\"77\" style=\"width: 77%;\">77%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-warning\">MEDIUM</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar4.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Michael</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Redesign Landing Page</a></td>\n    \t\t\t\t<td>15-11-2014</td>\n    \t\t\t\t<td>30 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"25\" aria-valuenow=\"25\" style=\"width: 25%;\">25%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-success\">LOW</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar4.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Jason</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Wordpress Theme</a></td>\n    \t\t\t\t<td>05-10-2014</td>\n    \t\t\t\t<td>N/A</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar progress-bar-default\" data-transitiongoal=\"100\" aria-valuenow=\"100\" style=\"width: 100%;\">100%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-default\">MEDIUM</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar6.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Michael</a></td>\n    \t\t\t\t<td><span class=\"label label-default\">CLOSED</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Redesign Landing Page</a></td>\n    \t\t\t\t<td>15-11-2014</td>\n    \t\t\t\t<td>30 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"33\" aria-valuenow=\"33\" style=\"width: 33%;\">33%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-success\">LOW</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar7.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Jason</a></td>\n    \t\t\t\t<td><span class=\"label label-warning\">PENDING</span></td>\n    \t\t\t</tr>\n    \t\t</tbody>\n    \t</table>\n    \t<!-- END PROJECT TABLE -->\n    </div>\n</div>\n"
+module.exports = "<h3>Top Heroes</h3>\n<!--<div class=\"grid grid-pad\">\n  <a *ngFor=\"let project of projects\"  [routerLink]=\"['/detail', project.id]\"  class=\"col-1-4\">\n    <div class=\"module hero\">\n      <h4>{{project.Name}}</h4>\n    </div>\n  </a>\n</div>-->\n<hero-search></hero-search>\n\n<div class=\"container bootstrap snippet\">\n    <div class=\"table-responsive\">\n    \t<!-- PROJECT TABLE -->\n    \t<table class=\"table colored-header datatable project-list\">\n    \t\t<thead>\n    \t\t\t<tr>\n    \t\t\t\t<th>Title</th>\n    \t\t\t\t<th>Date Start</th>\n    \t\t\t\t<th>Days to Deadline</th>\n    \t\t\t\t<th>Progress</th>\n    \t\t\t\t<th>Priority</th>\n    \t\t\t\t<th>Leader</th>\n    \t\t\t\t<th>Status</th>\n    \t\t\t</tr>\n    \t\t</thead>\n\t\t\t<tbody>\n\t\t\t\t<tr *ngFor=\"let project of projects\">\n\t\t\t\t\t<td><a [routerLink]=\"['/workItems', project.Name]\">{{project.Name}}</a></td>\n\t\t\t\t\t<td>{{project.StartDate}}</td>\n\t\t\t\t\t<td>{{project.ExpectedEndDate}}</td>\n\t\t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" [attr.data-transitiongoal]=\"project.StoryPoints\" [attr.aria-valuenow] =\"project.StoryPoints\" [style.width]=\"project.StoryPoints + '%'\">{{project.StoryPoints}}%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n\t\t\t\t\t<td><span class=\"label label-warning\">{{project.Priority}}</span></td>\n\t\t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar1.png\" alt=\"Avatar\" class=\"avatar img-circle\"> <a href=\"#\">{{project.Owner}}</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">{{project.Status}}</span></td>\n\t\t\t\t</tr>\n\t\t\t</tbody>\n\t\t\t<!--\n    \t\t<tbody>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Spot Media</a></td>\n    \t\t\t\t<td>18-05-2014</td>\n    \t\t\t\t<td>12 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"95\" aria-valuenow=\"95\" style=\"width: 95%;\">95%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-warning\">MEDIUM</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar1.png\" alt=\"Avatar\" class=\"avatar img-circle\"> <a href=\"#\">Michael</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">E-Commerce Site</a></td>\n    \t\t\t\t<td>24-05-2014</td>\n    \t\t\t\t<td>30 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"40\" aria-valuenow=\"40\" style=\"width: 40%;\">40%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-success\">LOW</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar2.png\" alt=\"Avatar\" class=\"avatar img-circle\"> <a href=\"#\">Antonius</a></td>\n    \t\t\t\t<td><span class=\"label label-warning\">PENDING</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Project 123GO</a></td>\n    \t\t\t\t<td>20-09-2014</td>\n    \t\t\t\t<td>50 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"65\" aria-valuenow=\"65\" style=\"width: 65%;\">65%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-danger\">HIGH</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar3.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Antonius</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Wordpress Theme</a></td>\n    \t\t\t\t<td>05-10-2014</td>\n    \t\t\t\t<td>40 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"77\" aria-valuenow=\"77\" style=\"width: 77%;\">77%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-warning\">MEDIUM</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar4.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Michael</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Redesign Landing Page</a></td>\n    \t\t\t\t<td>15-11-2014</td>\n    \t\t\t\t<td>30 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"25\" aria-valuenow=\"25\" style=\"width: 25%;\">25%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-success\">LOW</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar4.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Jason</a></td>\n    \t\t\t\t<td><span class=\"label label-success\">ACTIVE</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Wordpress Theme</a></td>\n    \t\t\t\t<td>05-10-2014</td>\n    \t\t\t\t<td>N/A</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar progress-bar-default\" data-transitiongoal=\"100\" aria-valuenow=\"100\" style=\"width: 100%;\">100%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-default\">MEDIUM</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar6.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Michael</a></td>\n    \t\t\t\t<td><span class=\"label label-default\">CLOSED</span></td>\n    \t\t\t</tr>\n    \t\t\t<tr>\n    \t\t\t\t<td><a href=\"#\">Redesign Landing Page</a></td>\n    \t\t\t\t<td>15-11-2014</td>\n    \t\t\t\t<td>30 days</td>\n    \t\t\t\t<td>\n    \t\t\t\t\t<div class=\"progress\">\n    \t\t\t\t\t\t<div class=\"progress-bar\" data-transitiongoal=\"33\" aria-valuenow=\"33\" style=\"width: 33%;\">33%</div>\n    \t\t\t\t\t</div>\n    \t\t\t\t</td>\n    \t\t\t\t<td><span class=\"label label-success\">LOW</span></td>\n    \t\t\t\t<td><img src=\"http://bootdey.com/img/Content/avatar/avatar7.png\" alt=\"Avatar\" class=\"avatar\"> <a href=\"#\">Jason</a></td>\n    \t\t\t\t<td><span class=\"label label-warning\">PENDING</span></td>\n    \t\t\t</tr>\n    \t\t</tbody>\n\t\t\t-->\n    \t</table>\n    \t<!-- END PROJECT TABLE -->\n    </div>\n</div>\n"
 
 /***/ }),
 
@@ -352,7 +363,7 @@ AppRoutingModule = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__team_service__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__team_service__ = __webpack_require__(53);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -404,9 +415,9 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dashboard_component__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__heroes_component__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__hero_detail_component__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__hero_service__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__party_service__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__team_service__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__hero_service__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__party_service__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__team_service__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__hero_search_component__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__training_component__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__team_component__ = __webpack_require__(101);
@@ -612,7 +623,7 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hero_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hero_service__ = __webpack_require__(52);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrainingComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -797,7 +808,7 @@ module.exports = module.exports.toString();
 /***/ 341:
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Navigation -->\r\n<nav class=\"navbar navbar-default navbar-fixed-top\" role=\"navigation\">\r\n        <div class=\"container\">\r\n            <!-- Brand and toggle get grouped for better mobile display -->\r\n            <div class=\"navbar-header\">\r\n              <ul class=\"nav navbar-nav\">\r\n\t\t\t\t<li><a href=\"#\" class=\"navbar-left\"><img src=\"/Data/Logo_Allianz.png\" style=\"max-width:50px; margin-top: -7px;\"></a></li>\r\n                <li><a class=\"navbar-brand\" routerLink=\"/dashboard\" routerLinkActive=\"active\">Dashboard</a></li>\r\n                <li><a class=\"navbar-brand\" routerLink=\"/team\" routerLinkActive=\"active\">Team</a></li>\r\n                 <li><a class=\"navbar-brand\" routerLink=\"/party\" routerLinkActive=\"active\">My Profile</a></li>\r\n                <!--<a class=\"navbar-brand\" routerLink=\"/heroes\" routerLinkActive=\"active\">Calendar</a>-->\r\n                <li class=\"dropdown\">\r\n                    <a class=\"dropdown-toggle navbar-brand\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Tasks <span class=\"caret\"></span></a>\r\n                    <ul class=\"dropdown-menu\">\r\n                        <li> <a *ngFor=\"let project of projects\"  [routerLink]=\"['/workItems', project.Name]\">{{project.Name}}</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li><a class=\"navbar-brand\" routerLink=\"/workItems/Jade\" routerLinkActive=\"active\">Tasks</a></li>\r\n                <li><a class=\"navbar-brand\" routerLink=\"/meetingRooms\" routerLinkActive=\"active\">Meetings</a></li>\r\n              </ul>\r\n            </div>\r\n        </div>\r\n        <!-- /.container -->\r\n</nav>\r\n<div class=\"container\">\r\n    <router-outlet></router-outlet>\r\n</div>"
+module.exports = "<!-- Navigation -->\r\n<nav class=\"navbar navbar-default navbar-fixed-top\" role=\"navigation\">\r\n        <div class=\"container\">\r\n            <!-- Brand and toggle get grouped for better mobile display -->\r\n            <div class=\"navbar-header\">\r\n              <ul class=\"nav navbar-nav\">\r\n\t\t\t\t<li><a href=\"#\" class=\"navbar-left\"><img src=\"/Data/Logo_Allianz.png\" style=\"max-width:50px; margin-top: -7px;\"></a></li>\r\n                <li><a class=\"navbar-brand\" routerLink=\"/dashboard\" routerLinkActive=\"active\">Dashboard</a></li>\r\n                <li><a class=\"navbar-brand\" routerLink=\"/team\" routerLinkActive=\"active\">Team</a></li>\r\n                 <li><a class=\"navbar-brand\" routerLink=\"/party\" routerLinkActive=\"active\">My Profile</a></li>\r\n                <!--<a class=\"navbar-brand\" routerLink=\"/heroes\" routerLinkActive=\"active\">Calendar</a>-->\r\n                <li class=\"dropdown\">\r\n                    <a class=\"dropdown-toggle navbar-brand\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Tasks <span class=\"caret\"></span></a>\r\n                    <ul class=\"dropdown-menu\">\r\n                        <li> <a *ngFor=\"let project of projects\"  [routerLink]=\"['/workItems', project.Name]\">{{project.Name}}</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li><a class=\"navbar-brand\" routerLink=\"/meetingRooms\" routerLinkActive=\"active\">Meetings</a></li>\r\n              </ul>\r\n            </div>\r\n        </div>\r\n        <!-- /.container -->\r\n</nav>\r\n<div class=\"container\">\r\n    <router-outlet></router-outlet>\r\n</div>"
 
 /***/ }),
 
@@ -846,7 +857,7 @@ module.exports = "<div class=\"row teamContainer\">\r\n<div class=\"col-md-12\">
 /***/ 348:
 /***/ (function(module, exports) {
 
-module.exports = "    <div class=\"container-fluid workItemContainer\">\r\n        <div id=\"sortableKanbanBoards\" class=\"row\">\r\n            <!--<div class='panel panel-primary kanban-col'>\r\n                <div class=\"panel-heading\">\r\n                    TODO\r\n                    <i class=\"fa fa-2x fa-plus-circle pull-right\"></i>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                    <div class='kanban-centered' [dragula]='\"first-bag\"'>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     <h2><a href=\"#\">Job Meeting</a></h2>\r\n                                    <p>You have a meeting at <strong>Laborator Office</strong> Today.</p>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     <h2><a href=\"#\">Art Ramadani</a> <span>posted a status update</span></h2>\r\n                                     <p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     There's also the possibility of moving elements around in the same container, changing their position\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div> \r\n                </div> \r\n            </div>\r\n            <div class='panel panel-primary kanban-col'>\r\n                <div class=\"panel-heading\">\r\n                    DOING\r\n                    <i class=\"fa fa-2x fa-plus-circle pull-right\"></i>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                    <div class='kanban-centered' [dragula]='\"doing-bag\"'>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     There's also the possibility of moving elements around in the same container, changing their position\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     There's also the possibility of moving elements around in the same container, changing their position\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>-->\r\n\r\n         \r\n             <div class='panel panel-primary kanban-col'>\r\n                <div class=\"panel-heading\">\r\n                    TODO\r\n                    <i class=\"fa fa-2x fa-plus-circle pull-right\"></i>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                   <div class='kanban-centered' [dragula]='\"another-bag\"' [dragulaModel]='todo'>\r\n                        <div class=\"kanban-entry grab\" *ngFor='let workItem of todo'>\r\n                            <div class=\"kanban-entry-inner\"><div class=\"kanban-label\">{{workItem.Name}}</div></div>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n             <div class='panel panel-primary kanban-col'>\r\n                <div class=\"panel-heading\">\r\n                    DOING\r\n                    <i class=\"fa fa-2x fa-plus-circle pull-right\"></i>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                   <div class='kanban-centered' [dragula]='\"another-bag\"' [dragulaModel]='workStatus'>\r\n                        <div class=\"kanban-entry grab\" *ngFor='let workItem of doing'>\r\n                            <div class=\"kanban-entry-inner\"><div class=\"kanban-label\">{{workItem.Name}}</div></div>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n            <div class='panel panel-primary kanban-col'>\r\n                <div class=\"panel-heading\">\r\n                    DONE\r\n                    <i class=\"fa fa-2x fa-plus-circle pull-right\"></i>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                    <div class='kanban-centered' [dragula]='\"another-bag\"' [dragulaModel]='workStatus'>\r\n                        <div class=\"kanban-entry grab\" *ngFor=\"let workItem of done\" [attr.id]=\"workItem.Name\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     {{workItem.Name}}\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                  \r\n                </div>\r\n            </div>\r\n         </div>\r\n    </div>\r\n\r\n\r\n    <!-- Static Modal -->\r\n    <div class=\"modal modal-static fade\" id=\"processing-modal\" role=\"dialog\" aria-hidden=\"true\">\r\n        <div class=\"modal-dialog\">\r\n            <div class=\"modal-content\">\r\n                <div class=\"modal-body\">\r\n                    <div class=\"text-center\">\r\n                        <i class=\"fa fa-refresh fa-5x fa-spin\"></i>\r\n                        <h4>Processing...</h4>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>"
+module.exports = "    <div class=\"container-fluid workItemContainer\">\r\n        <div id=\"sortableKanbanBoards\" class=\"row\">\r\n            <!--<div class='panel panel-primary kanban-col'>\r\n                <div class=\"panel-heading\">\r\n                    TODO\r\n                    <i class=\"fa fa-2x fa-plus-circle pull-right\"></i>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                    <div class='kanban-centered' [dragula]='\"first-bag\"'>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     <h2><a href=\"#\">Job Meeting</a></h2>\r\n                                    <p>You have a meeting at <strong>Laborator Office</strong> Today.</p>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     <h2><a href=\"#\">Art Ramadani</a> <span>posted a status update</span></h2>\r\n                                     <p>Tolerably earnestly middleton extremely distrusts she boy now not. Add and offered prepare how cordial two promise. Greatly who affixed suppose but enquire compact prepare all put. Added forth chief trees but rooms think may.</p>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     There's also the possibility of moving elements around in the same container, changing their position\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div> \r\n                </div> \r\n            </div>\r\n            <div class='panel panel-primary kanban-col'>\r\n                <div class=\"panel-heading\">\r\n                    DOING\r\n                    <i class=\"fa fa-2x fa-plus-circle pull-right\"></i>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                    <div class='kanban-centered' [dragula]='\"doing-bag\"'>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     There's also the possibility of moving elements around in the same container, changing their position\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"kanban-entry grab\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     There's also the possibility of moving elements around in the same container, changing their position\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>-->\r\n\r\n         \r\n             <div class='panel panel-primary kanban-col'>\r\n                <div class=\"panel-heading\">\r\n                    TODO\r\n                    <i class=\"fa fa-2x fa-plus-circle pull-right\"></i>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                   <div class='kanban-centered' [dragula]='\"another-bag\"' [dragulaModel]='todo'>\r\n                        <div class=\"kanban-entry grab\" *ngFor='let workItem of todo'>\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                    <h2>{{workItem.Name}}</h2>\r\n                                    <button type=\"button\" class=\"btn btn-xs btn-primary\" (click)=\"moveToInProgress(workItem)\">\r\n                                        <span class=\"glyphicon glyphicon-chevron-right\"></span> Move&nbsp ;\r\n                                    </button>\r\n                                 </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n             <div class='panel panel-primary kanban-col'>\r\n                <div class=\"panel-heading\">\r\n                    DOING\r\n                    <i class=\"fa fa-2x fa-plus-circle pull-right\"></i>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                   <div class='kanban-centered' [dragula]='\"another-bag\"' [dragulaModel]='workStatus'>\r\n                        <div class=\"kanban-entry grab\" *ngFor='let workItem of doing'>\r\n                            <div class=\"kanban-entry-inner\"><div class=\"kanban-label\">{{workItem.Name}}</div></div>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n            <div class='panel panel-primary kanban-col'>\r\n                <div class=\"panel-heading\">\r\n                    DONE\r\n                    <i class=\"fa fa-2x fa-plus-circle pull-right\"></i>\r\n                </div>\r\n                <div class=\"panel-body\">\r\n                    <div class='kanban-centered' [dragula]='\"another-bag\"' [dragulaModel]='workStatus'>\r\n                        <div class=\"kanban-entry grab\" *ngFor=\"let workItem of done\" [attr.id]=\"workItem.Name\">\r\n                            <div class=\"kanban-entry-inner\">\r\n                                <div class=\"kanban-label\">\r\n                                     {{workItem.Name}}\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                  \r\n                </div>\r\n            </div>\r\n         </div>\r\n    </div>\r\n\r\n\r\n    <!-- Static Modal -->\r\n    <div class=\"modal modal-static fade\" id=\"processing-modal\" role=\"dialog\" aria-hidden=\"true\">\r\n        <div class=\"modal-dialog\">\r\n            <div class=\"modal-content\">\r\n                <div class=\"modal-body\">\r\n                    <div class=\"text-center\">\r\n                        <i class=\"fa fa-refresh fa-5x fa-spin\"></i>\r\n                        <h4>Processing...</h4>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>"
 
 /***/ }),
 
@@ -858,7 +869,7 @@ module.exports = __webpack_require__(159);
 
 /***/ }),
 
-/***/ 43:
+/***/ 52:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -936,7 +947,116 @@ var _a;
 
 /***/ }),
 
-/***/ 62:
+/***/ 53:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeamService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var TeamService = (function () {
+    function TeamService(http) {
+        this.http = http;
+        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
+        //private partiesUrl    = 'api/parties';  // URL to web api
+        this.workItemsUrl = '/workItems';
+        this.projectUrl = '/projects';
+    }
+    /*
+    getParties(): Promise<Party[]> {
+      return this.http.get(this.partiesUrl)
+                 .toPromise()
+                 .then(response => response.json().data as Party[])
+                 .catch(this.handleError);
+    }*/
+    TeamService.prototype.getWorkItems = function (id) {
+        var url = this.workItemsUrl + "/" + id;
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    TeamService.prototype.getProjects = function () {
+        return this.http.get(this.projectUrl)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    TeamService.prototype.moveToInprogress = function (id) {
+        return this.http
+            .post(this.workItemsUrl, JSON.stringify({ id: id }), { headers: this.headers })
+            .toPromise()
+            .then(function (res) { return res.json(); })
+            .catch(this.handleError);
+    };
+    /*
+     getParty(id: number): Promise<Party> {
+       if (Number.isNaN(id)){
+             id = 11;
+       }
+       const url = `${this.partiesUrl}/${id}`;
+       return this.http.get(url)
+         .toPromise()
+         .then(response => response.json().data as Party)
+         .catch(this.handleError);
+     }
+   
+     delete(id: number): Promise<void> {
+       const url = `${this.partiesUrl}/${id}`;
+       return this.http.delete(url, {headers: this.headers})
+         .toPromise()
+         .then(() => null)
+         .catch(this.handleError);
+     }
+   
+     create(name: string): Promise<Party> {
+       return this.http
+         .post(this.partiesUrl, JSON.stringify({name: name}), {headers: this.headers})
+         .toPromise()
+         .then(res => res.json().data)
+         .catch(this.handleError);
+     }
+   
+     update(party: Party): Promise<Party> {
+       const url = `${this.partiesUrl}/${party.id}`;
+       return this.http
+         .put(url, JSON.stringify(party), {headers: this.headers})
+         .toPromise()
+         .then(() => party)
+         .catch(this.handleError);
+     }
+     */
+    TeamService.prototype.handleError = function (error) {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
+    };
+    return TeamService;
+}());
+TeamService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object])
+], TeamService);
+
+var _a;
+//# sourceMappingURL=team.service.js.map
+
+/***/ }),
+
+/***/ 63:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1025,107 +1145,6 @@ var _a;
 
 /***/ }),
 
-/***/ 63:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(85);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TeamService; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var TeamService = (function () {
-    function TeamService(http) {
-        this.http = http;
-        this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
-        //private partiesUrl    = 'api/parties';  // URL to web api
-        this.workItemsUrl = '/workItems';
-        this.projectUrl = '/projects';
-    }
-    /*
-    getParties(): Promise<Party[]> {
-      return this.http.get(this.partiesUrl)
-                 .toPromise()
-                 .then(response => response.json().data as Party[])
-                 .catch(this.handleError);
-    }*/
-    TeamService.prototype.getWorkItems = function (id) {
-        return this.http.get(this.workItemsUrl)
-            .toPromise()
-            .then(function (response) { return response.json(); })
-            .catch(this.handleError);
-    };
-    TeamService.prototype.getProjects = function () {
-        return this.http.get(this.projectUrl)
-            .toPromise()
-            .then(function (response) { return response.json(); })
-            .catch(this.handleError);
-    };
-    /*
-     getParty(id: number): Promise<Party> {
-       if (Number.isNaN(id)){
-             id = 11;
-       }
-       const url = `${this.partiesUrl}/${id}`;
-       return this.http.get(url)
-         .toPromise()
-         .then(response => response.json().data as Party)
-         .catch(this.handleError);
-     }
-   
-     delete(id: number): Promise<void> {
-       const url = `${this.partiesUrl}/${id}`;
-       return this.http.delete(url, {headers: this.headers})
-         .toPromise()
-         .then(() => null)
-         .catch(this.handleError);
-     }
-   
-     create(name: string): Promise<Party> {
-       return this.http
-         .post(this.partiesUrl, JSON.stringify({name: name}), {headers: this.headers})
-         .toPromise()
-         .then(res => res.json().data)
-         .catch(this.handleError);
-     }
-   
-     update(party: Party): Promise<Party> {
-       const url = `${this.partiesUrl}/${party.id}`;
-       return this.http
-         .put(url, JSON.stringify(party), {headers: this.headers})
-         .toPromise()
-         .then(() => party)
-         .catch(this.handleError);
-     }
-     */
-    TeamService.prototype.handleError = function (error) {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
-    };
-    return TeamService;
-}());
-TeamService = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Http */]) === "function" && _a || Object])
-], TeamService);
-
-var _a;
-//# sourceMappingURL=team.service.js.map
-
-/***/ }),
-
 /***/ 96:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1200,7 +1219,7 @@ var _a;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hero_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__team_service__ = __webpack_require__(53);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1214,13 +1233,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var DashboardComponent = (function () {
-    function DashboardComponent(heroService) {
-        this.heroService = heroService;
-        this.heroes = [];
+    function DashboardComponent(teamService) {
+        this.teamService = teamService;
+        this.projects = [];
     }
     DashboardComponent.prototype.ngOnInit = function () {
+        var _this = this;
         //this.heroService.getHeroes()
         //.then(heroes => this.heroes = heroes.slice(1, 5));
+        this.teamService.getProjects()
+            .then(function (projects) { _this.projects = projects; });
     };
     return DashboardComponent;
 }());
@@ -1230,7 +1252,7 @@ DashboardComponent = __decorate([
         template: __webpack_require__(143),
         styles: [__webpack_require__(140)]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__hero_service__["a" /* HeroService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__hero_service__["a" /* HeroService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__team_service__["a" /* TeamService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__team_service__["a" /* TeamService */]) === "function" && _a || Object])
 ], DashboardComponent);
 
 var _a;
@@ -1247,7 +1269,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__hero_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__hero_service__ = __webpack_require__(52);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeroDetailComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1305,7 +1327,7 @@ var _a, _b, _c;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__hero_service__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__hero_service__ = __webpack_require__(52);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeroesComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;

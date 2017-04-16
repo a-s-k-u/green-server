@@ -55,33 +55,24 @@ function getParties($team){
 
 function getProjects(){
 
-    $projectDetailsPath = [io.path]::combine($global:mainFolder,'Data\Team\Project-Details.csv');
-    $projects = Import-Csv -Path $projectDetailsPath
-
+    $teamFolder = [io.path]::combine($global:mainFolder,'Data\Team');
+    $files = Get-ChildItem -Path $teamFolder
     $collectionWithItems = New-Object System.Collections.Generic.List[System.Object]
 
+    $files | foreach-object {
+         # handle individual Project files.
+         $filePath = [io.path]::combine($teamFolder,$_.Name)
+         $workItems = Import-Csv -Path $filePath
+         $projectSummary =  $workItems | Where-Object {$_.DataType -eq 'A'}
+         $collectionWithItems.Add($projectSummary);
 
-    $projects | foreach-object {
-       $obj = New-Object psobject -Property @{
-                Id	             = $_.Id
-                Name             = $_.Name
-               	Description      = $_.Description
-               	StartDate        = $_.StartDate
-               	PointsCompleted  = $_.PointsCompleted
-                PointsTotal      = $_.PointsTotal
-                Owner            = $_.Owner	
-                Priority         = $_.Priority
-                Status           = $_.Status
-                }
-       $collectionWithItems.Add($obj);
-    }
-
-    return ,$collectionWithItems | ConvertTo-Json
+     }#fileList
+    return ,$collectionWithItems | ConvertTo-Json #the comma is to respond the collection as array instead of a single object for single element array.
 }
 
-function getWorkItems(){
+function getWorkItems($id){
 
-    $workItemsPath = [io.path]::combine($global:mainFolder,'Data\Team\Jade-WorkItems.csv');
+    $workItemsPath = [io.path]::combine($global:mainFolder,'Data\Team\'+$id.Trim()+'-WorkItems.csv');
     $workItems = Import-Csv -Path $workItemsPath
 
     $todo  = New-Object System.Collections.Generic.List[System.Object]
@@ -156,3 +147,73 @@ function getAllScores(){
     return $collectionWithItems | ConvertTo-Json
 
 }
+
+function setProjectDetails($teamFolder){
+  
+  $files = Get-ChildItem -Path $teamFolder
+
+  $files | foreach-object {
+     # handle individual Project files.
+     $filePath = [io.path]::combine($teamFolder,$_.Name)
+     $filePath
+     $workItems = Import-Csv -Path $filePath 
+     $workItemsNew  = New-Object System.Collections.Generic.List[System.Object]
+     $totalCompleted = 0
+     $totalPoints = 0
+     $projectSummary = $null;
+
+     $workItems | foreach-object {
+     
+     if($_.DataType -eq 'A'){
+      $projectSummary = New-Object psobject -Property @{
+                DataType         = $_.DataType
+                Id	             = $_.Id
+                Name             = $_.Name
+                Comments         = $_.Comments
+               	Status           = $_.Status
+               	Priority         = $_.Priority
+               	Owner            = $_.Owner
+                StoryPoints      = $_.StoryPoints
+                StartDate        = $_.StartDate	
+                ExpectedEndDate  = $_.ExpectedEndDate
+                ActualEndDate    = $_.ActualEndDate
+          }
+          $workItemsNew.Add($projectSummary);
+       }
+       elseif($_.DataType -eq 'B'){
+        $workItem = New-Object psobject -Property @{
+                DataType         = $_.DataType
+                Id	             = $_.Id
+                Name             = $_.Name
+                Comments         = $_.Comments
+               	Status           = $_.Status
+               	Priority         = $_.Priority
+               	Owner            = $_.Owner
+                StoryPoints      = $_.StoryPoints
+                StartDate        = $_.StartDate	
+                ExpectedEndDate  = $_.ExpectedEndDate
+                ActualEndDate    = $_.ActualEndDate
+          }
+
+          $totalPoints = $totalPoints + $_.StoryPoints
+
+          if($_.Status -eq 'Done'){
+          $totalCompleted = $totalCompleted + $_.StoryPoints
+          }
+          $workItemsNew.Add($workItem);
+          $totalCompleted 
+          $totalPoints
+       }        
+     }
+
+     if($totalPoints -eq 0){
+     $projectSummary.StoryPoints = 0
+     }else{
+     $projectSummary.StoryPoints = ($totalCompleted / $totalPoints)*100
+     }
+     $projectSummary.StoryPoints
+     $workItemsNew | Export-Csv $filePath -NoTypeInformation
+
+  }#File loop
+
+ }

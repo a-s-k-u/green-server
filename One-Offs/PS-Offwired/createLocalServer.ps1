@@ -91,6 +91,26 @@ try{
             $response.Close()
             continue;
         }
+         elseif($request.RawUrl -Match ".woff2"){
+            $pngPath = [io.path]::combine($global:projectFolder,$request.RawUrl.TrimStart("/"))
+            #$page = [convert]::ToBase64String((get-content $pngPath -encoding byte))
+            $response.Headers.Add("Content-Type","application/x-font-woff")
+            $buffer = (get-content $pngPath -encoding byte)
+            $response.ContentLength64 = $buffer.Length
+            $response.OutputStream.Write($buffer,0,$buffer.Length)
+            $response.Close()
+            continue;
+        }
+        elseif($request.RawUrl -Match ".ttf"){
+            $pngPath = [io.path]::combine($global:projectFolder,$request.RawUrl.TrimStart("/"))
+            #$page = [convert]::ToBase64String((get-content $pngPath -encoding byte))
+            $response.Headers.Add("Content-Type","application/octet-stream")
+            $buffer = (get-content $pngPath -encoding byte)
+            $response.ContentLength64 = $buffer.Length
+            $response.OutputStream.Write($buffer,0,$buffer.Length)
+            $response.Close()
+            continue;
+        }
         elseif($request.HttpMethod.ToUpper() -eq 'GET'){
             $paramCount =  $request.Url.Segments.Count - 2
             Write-Host $request.Url.Segments;
