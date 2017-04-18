@@ -22,36 +22,44 @@
 }
 
 function getParties($team){
+        $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
+        #$teamName = '' + [string]$team
+        #$teamName
+        $teamName = $team.Trim();
+        #$teamName
+        $parties = Import-Csv -Path $userDetailsPath | Where-Object {$_.Team -eq $teamName}
 
-    $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
-    #$teamName = '' + [string]$team
-    #$teamName
-    $teamName = $team.Trim();
-    #$teamName
-    $parties = Import-Csv -Path $userDetailsPath | Where-Object {$_.Team -eq $teamName}
-
-    #$collectionWithItems = @(2)
-    $collectionWithItems = New-Object System.Collections.Generic.List[System.Object]
+        #$collectionWithItems = @(2)
+        $collectionWithItems = New-Object System.Collections.Generic.List[System.Object]
 
 
-    $parties | foreach-object {
-       $obj = New-Object psobject -Property @{
-                Id	      = $_.Id
-                Name      = $_.Name
-               	Team      = $_.Team
-               	Location  = $_.Location
-               	Role      = $_.Role
-                DeskPhone = $_.Deskphone
-                MobPhone  = $_.MobPhone	
-                Email     = $_.Email
-                Gender    = $_.Gender
-                Avatar    = $_.Avatar
-                }
-       $collectionWithItems.Add($obj);
-    }
+        $parties | foreach-object {
+           $obj = New-Object psobject -Property @{
+                    Id	      = $_.Id
+                    Name      = $_.Name
+               	    Team      = $_.Team
+               	    Location  = $_.Location
+               	    Role      = $_.Role
+                    DeskPhone = $_.Deskphone
+                    MobPhone  = $_.MobPhone	
+                    Email     = $_.Email
+                    Gender    = $_.Gender
+                    Avatar    = $_.Avatar
+                    }
+           $collectionWithItems.Add($obj);
+        }
 
-    return ,$collectionWithItems | ConvertTo-Json
-}
+        return ,$collectionWithItems | ConvertTo-Json
+ }
+ function getParty($id){
+        $id = $id.trim()
+        if($id -match 'i0' ) {
+        $id = [Environment]::UserName
+        }
+        $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
+        $party = Import-Csv -Path $userDetailsPath | Where-Object {$_.Id -match $id}
+        return $party | ConvertTo-Json
+ }
 
 function getProjects(){
 
@@ -82,6 +90,7 @@ function getWorkItems($id){
     $workItems | foreach-object {
        $obj = New-Object psobject -Property @{
                 Id	        = $_.Id
+                DataType    = $_.DataType
                 Name        = $_.Name
                	Status      = $_.Status
                	Owner       = $_.Owner
@@ -105,6 +114,37 @@ function getWorkItems($id){
      
      return ,$c | ConvertTo-Json
 }
+function postWorkItems($workItemInput)
+{
+    $workItemsPath = [io.path]::combine($global:mainFolder,'Data\Team\'+$workItemInput.projectName.Trim()+'-WorkItems.csv');
+    $workItems = Import-Csv -Path $workItemsPath
+    $nextWorkItemId = $workItems.length + 1
+    $obj = New-Object psobject -Property @{
+                Id	        = $nextWorkItemId
+                DataType    = 'B'
+                Name        = $workItemInput.taskName
+               	Status      = 'Todo'
+               	Owner       = 'someone'
+               	StoryPoints = $workItemInput.storyPoints
+                }
+    $workItems += $obj
+    
+    $workItems | Export-Csv $workItemsPath -NoTypeInformation
+    return $obj | ConvertTo-Json
+}
+function putWorkItems($workItemInput)
+{
+    $workItemsPath = [io.path]::combine($global:mainFolder,'Data\Team\'+$workItemInput.projectName.Trim()+'-WorkItems.csv');
+    $workItems = Import-Csv -Path $workItemsPath
+    $workItems | ForEach {
+    if (( $_.Id -match $workItemInput.workItem.Id) -and ($workItemInput.workItem.DataType -eq 'B')){
+       $_.Status = $workItemInput.toStatus
+    }
+    }     
+    $workItems | Export-Csv $workItemsPath -NoTypeInformation
+    return $workItemInput.workItem | ConvertTo-Json
+}
+
 
 function getAllScores(){
     $scoreCardPath = [io.path]::combine($global:projectFolder,'DataFolder\scoreCards.csv');

@@ -146,6 +146,16 @@ try{
              $response.Headers.Add("Content-Type","application/json")
 
         }
+        elseif($request.HttpMethod.ToUpper() -eq 'PUT'){
+             $StreamReader = New-Object System.IO.StreamReader $request.InputStream
+             $StreamData = $StreamReader.ReadToEnd()
+             $JSON = $StreamData | ConvertFrom-Json
+             $methodName = $request.HttpMethod + $request.Url.Segments[1]
+             $exp = $methodName + ' $JSON'
+             $page = Invoke-Expression $exp
+             $response.Headers.Add("Content-Type","application/json")
+
+        }
         else{
             $page = " incorrect URL"
             $response.Headers.Add("Content-Type","text/html")     

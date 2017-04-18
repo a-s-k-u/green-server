@@ -34,7 +34,6 @@
           $workItemsNew.Add($projectSummary);
        }
        elseif($_.DataType -eq 'B'){
-        $projectSummary.Owner = 'Someone'
         $workItem = New-Object psobject -Property @{
                 DataType         = $_.DataType
                 Id	             = $_.Id
