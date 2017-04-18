@@ -16,8 +16,8 @@
  #*=============================================================================
 "Control reached powershell - setting up a local server/listener"
 #----------------------------------------------------------------
-$global:projectFolder = 'C:\Users\arun-\Documents\GitHub\green-server\One-Offs\PS-Offwired\Offwired'
-#$global:projectFolder = $args[0]
+#$global:projectFolder = 'C:\Users\arun-\Documents\GitHub\green-server\One-Offs\PS-Offwired\Offwired'
+$global:projectFolder = $args[0]
 $global:mainFolder = split-path -parent $MyInvocation.MyCommand.Definition
 'args - 0 is ' + $args[0]
 #----------------------------------------------------------------

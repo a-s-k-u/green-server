@@ -1,8 +1,8 @@
-Id,StoryPoints,DataType,StartDate,ActualEndDate,ExpectedEndDate,Owner,Name,Comments,Status,Priority
-1,0,A,11/4/2017,,14/4/2017,Someone,Jade,,In Progress,
-1,10,B,,,,Arun,Job Meeting 02,,ToDo,
-2,10,B,,,,Arun,Job Meeting 03,,ToDo,
-3,10,B,,,,Arun,Job Meeting 04,,ToDo,
-4,10,B,,,,Arun,Job Meeting 05,,ToDo,
-5,10,B,,,,Arun,Job Meeting 06,,ToDo,
-6,10,B,,,,Arun,Job Meeting 07,,ToDo,
+"Id","StoryPoints","DataType","StartDate","ActualEndDate","ExpectedEndDate","Owner","Name","Comments","Status","Priority"
+"1","0","A","11/4/2017","","14/4/2017","Someone","Jade","","Doing",""
+"1","10","B","","","","Arun","Job Meeting 02","","Doing",""
+"2","10","B","","","","Arun","Job Meeting 03","","ToDo",""
+"3","10","B","","","","Arun","Job Meeting 04","","Done",""
+"4","10","B","","","","Arun","Job Meeting 05","","Doing",""
+"5","10","B","","","","Arun","Job Meeting 06","","Done",""
+"6","10","B","","","","Arun","Job Meeting 07","","Doing",""

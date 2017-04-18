@@ -144,6 +144,41 @@ function putWorkItems($workItemInput)
     $workItems | Export-Csv $workItemsPath -NoTypeInformation
     return $workItemInput.workItem | ConvertTo-Json
 }
+function postParty($party)
+{
+    $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
+    $parties = Import-Csv -Path $userDetailsPath
+    $newParty = New-Object psobject -Property @{
+                Id	        = $party.Id
+                Team        = $party.Team
+                Name        = $party.Name
+               	Email       = $party.Email
+                DeskPhone   = $party.DeskPhone
+                MobPhone    = $party.MobPhone
+                Location    = $party.Location
+                Avatar      = $party.Avatar
+                }
+    $parties += $newParty
+    $parties | Export-Csv $userDetailsPath -NoTypeInformation
+    return $newParty| ConvertTo-Json
+}
+function putParty($party)
+{
+    $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
+    $parties = Import-Csv -Path $userDetailsPath
+    $parties | ForEach {
+    if ($_.Id -match $party.Id){
+       $_.Name = $party.Name
+       $_.Email = $party.Email
+       $_.DeskPhone = $party.DeskPhone
+       $_.MobPhone = $party.MobPhone
+       $_.Location = $party.Location
+       $_.Avatar = $party.Avatar
+    }
+    }     
+    $parties | Export-Csv $userDetailsPath -NoTypeInformation
+    return $party| ConvertTo-Json
+}
 
 
 function getAllScores(){
