@@ -64,6 +64,9 @@ function getParties($team){
 function getProjects(){
 
     $teamFolder = [io.path]::combine($global:mainFolder,'Data\Team');
+
+    setProjectDetails($teamFolder) #to refresh the list.
+
     $files = Get-ChildItem -Path $teamFolder
     $collectionWithItems = New-Object System.Collections.Generic.List[System.Object]
 
@@ -124,7 +127,7 @@ function postWorkItems($workItemInput)
                 DataType    = 'B'
                 Name        = $workItemInput.taskName
                	Status      = 'Todo'
-               	Owner       = 'someone'
+               	Owner       = [Environment]::UserName
                	StoryPoints = $workItemInput.storyPoints
                 }
     $workItems += $obj
@@ -230,7 +233,6 @@ function setProjectDetails($teamFolder){
   $files | foreach-object {
      # handle individual Project files.
      $filePath = [io.path]::combine($teamFolder,$_.Name)
-     $filePath
      $workItems = Import-Csv -Path $filePath 
      $workItemsNew  = New-Object System.Collections.Generic.List[System.Object]
      $totalCompleted = 0
@@ -276,8 +278,6 @@ function setProjectDetails($teamFolder){
           $totalCompleted = $totalCompleted + $_.StoryPoints
           }
           $workItemsNew.Add($workItem);
-          $totalCompleted 
-          $totalPoints
        }        
      }
 
@@ -286,7 +286,6 @@ function setProjectDetails($teamFolder){
      }else{
      $projectSummary.StoryPoints = ($totalCompleted / $totalPoints)*100
      }
-     $projectSummary.StoryPoints
      $workItemsNew | Export-Csv $filePath -NoTypeInformation
 
   }#File loop
