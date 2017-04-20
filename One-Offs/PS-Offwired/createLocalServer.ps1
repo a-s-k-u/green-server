@@ -128,6 +128,9 @@ try{
             try{
                 $page = Invoke-Expression $exp
                 $response.Headers.Add("Content-Type","application/json")
+                $response.Headers.Add("Cache-Control","no-store, no-cache, must-revalidate, post-check=0, pre-check=0")
+                $response.Headers.Add("Expires",-1)
+                $response.Headers.Add("Pragma","no-cache") 
             }catch{
                 Write-Host $_.Exception.Message
                 $pagePath = [io.path]::combine($global:projectFolder,'index.html') 
