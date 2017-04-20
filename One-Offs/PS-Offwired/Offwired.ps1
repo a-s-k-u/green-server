@@ -160,6 +160,7 @@ function postParty($party)
                 MobPhone    = $party.MobPhone
                 Location    = $party.Location
                 Avatar      = $party.Avatar
+                ShortDescription = $party.ShortDescription
                 }
     $parties += $newParty
     $parties | Export-Csv $userDetailsPath -NoTypeInformation
@@ -177,6 +178,7 @@ function putParty($party)
        $_.MobPhone = $party.MobPhone
        $_.Location = $party.Location
        $_.Avatar = $party.Avatar
+       $_.ShortDescription = $party.ShortDescription
     }
     }     
     $parties | Export-Csv $userDetailsPath -NoTypeInformation
