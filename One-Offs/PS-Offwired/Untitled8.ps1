@@ -1,0 +1,1 @@
+﻿New-ScheduledTaskAction -Execute "PowerShell.exe"

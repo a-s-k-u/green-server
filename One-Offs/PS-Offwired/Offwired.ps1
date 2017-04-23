@@ -228,6 +228,10 @@ function getAllScores(){
 
 }
 
+function postCloseSession(){
+  exit;
+}
+
 function setProjectDetails($teamFolder){
   
   $files = Get-ChildItem -Path $teamFolder
