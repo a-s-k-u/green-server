@@ -695,10 +695,12 @@ var AppComponent = (function () {
         this.offwiredService = offwiredService;
         this.title = 'Offwired';
         this.projects = [];
-        window.onbeforeunload = function (e) {
-            offwiredService.closeSession().then();
-            alert('The local server will be closed');
+        /*
+        window.onbeforeunload = function(e) {
+          offwiredService.closeSession().then();
+          alert('The local server will be closed');
         };
+        */
     }
     AppComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1434,7 +1436,7 @@ var PartyService = (function () {
         this.http = http;
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
         this.partiesUrl = '/parties'; // URL to web api
-        this.partyURL = '/party';
+        this.partyURL = '/party1';
         this.partySummaryURL = '/partySummary';
     }
     PartyService.prototype.getParties = function (team) {

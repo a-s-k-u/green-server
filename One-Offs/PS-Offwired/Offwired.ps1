@@ -51,7 +51,7 @@ function getParties($team){
 
         return ,$collectionWithItems | ConvertTo-Json
  }
- function getParty($id){
+ function getParty1($id){
         $id = $id.trim()
         if($id -match 'i0' ) {
         $id = [Environment]::UserName

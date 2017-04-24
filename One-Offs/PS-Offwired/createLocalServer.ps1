@@ -44,8 +44,9 @@ $form1 = New-Object System.Windows.Forms.form
 $NotifyIcon= New-Object System.Windows.Forms.NotifyIcon
 $ContextMenu = New-Object System.Windows.Forms.ContextMenu
 $MenuItem = New-Object System.Windows.Forms.MenuItem
+$MenuItem2 = New-Object System.Windows.Forms.MenuItem
 $TimerHDD = New-Object System.Windows.Forms.Timer
-$icoPath = [io.path]::combine($global:mainFolder,'Data\a.ico');
+$icoPath = [io.path]::combine($global:mainFolder,'Data\app.ico');
 
 $form1.ShowInTaskbar = $false
 $form1.WindowState = "minimized"
@@ -61,7 +62,13 @@ $MenuItem.add_Click({
    Invoke-WebRequest -Uri http://localhost:8082/CloseSession -Method POST
    #exit;
 })
-$NotifyIcon.contextMenu.MenuItems.AddRange($MenuItem)
+$MenuItem2.Text = "Open"
+$MenuItem2.add_Click({
+   Start-Process -FilePath "http://localhost:8082/index.html"
+})
+$NotifyIcon.contextMenu.MenuItems.AddRange($MenuItem);
+$NotifyIcon.contextMenu.MenuItems.AddRange($MenuItem2);
+
 $NotifyIcon.Visible = $True
 [void][System.Windows.Forms.Application]::Run($form1)
   }
