@@ -358,11 +358,11 @@ var TeamComponent = (function () {
         //.then(parties => this.parties = parties);
         this.partyService.getPartySummary()
             .then(function (partySummary) { _this.partySummary = partySummary; });
-        this.partyService.getParties('Jade')
+        this.partyService.getParties('WorkersComp')
             .then(function (parties) {
             _this.selectedParties = parties;
-            _this.selectedTeam = 'Jade';
-            _this.party.Team = 'Jade';
+            _this.selectedTeam = 'WorkersComp';
+            _this.party.Team = 'WorkersComp';
         });
     };
     TeamComponent.prototype.refreshSelectedSummary = function (team) {
