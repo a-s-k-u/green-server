@@ -165,7 +165,7 @@ var OffwiredService = (function () {
     function OffwiredService(http) {
         this.http = http;
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
-        this.offwiredUrl = '/offwired';
+        this.offwiredUrl = '/offwiredapi';
     }
     OffwiredService.prototype.closeSession = function () {
         return this.http
@@ -1320,8 +1320,8 @@ var TeamService = (function () {
         this.http = http;
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
         //private partiesUrl    = 'api/parties';  // URL to web api
-        this.workItemsUrl = '/workItems';
-        this.projectUrl = '/projects';
+        this.workItemsUrl = '/workItemsapi';
+        this.projectUrl = '/projectsapi';
     }
     /*
     getParties(): Promise<Party[]> {
@@ -1435,9 +1435,9 @@ var PartyService = (function () {
     function PartyService(http) {
         this.http = http;
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
-        this.partiesUrl = '/parties'; // URL to web api
-        this.partyURL = '/party1';
-        this.partySummaryURL = '/partySummary';
+        this.partiesUrl = '/partiesapi'; // URL to web api
+        this.partyURL = '/partyapi';
+        this.partySummaryURL = '/partySummaryapi';
     }
     PartyService.prototype.getParties = function (team) {
         var url = this.partiesUrl + "/" + team;

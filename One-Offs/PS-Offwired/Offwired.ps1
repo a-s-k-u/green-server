@@ -1,4 +1,4 @@
-﻿function getPartySummary(){
+﻿function getPartySummaryapi(){
 
     $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
     $parties = Import-Csv -Path $userDetailsPath | group Team
@@ -21,7 +21,7 @@
      return ,$c | ConvertTo-Json
 }
 
-function getParties($team){
+function getPartiesapi($team){
         $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
         #$teamName = '' + [string]$team
         #$teamName
@@ -51,7 +51,7 @@ function getParties($team){
 
         return ,$collectionWithItems | ConvertTo-Json
  }
- function getParty1($id){
+ function getPartyapi($id){
         $id = $id.trim()
         if($id -match 'i0' ) {
         $id = [Environment]::UserName
@@ -61,7 +61,7 @@ function getParties($team){
         return $party | ConvertTo-Json
  }
 
-function getProjects(){
+function getProjectsapi(){
 
     $teamFolder = [io.path]::combine($global:mainFolder,'Data\Team');
 
@@ -81,7 +81,7 @@ function getProjects(){
     return ,$collectionWithItems | ConvertTo-Json #the comma is to respond the collection as array instead of a single object for single element array.
 }
 
-function getWorkItems($id){
+function getWorkItemsapi($id){
 
     $workItemsPath = [io.path]::combine($global:mainFolder,'Data\Team\'+$id.Trim()+'-WorkItems.csv');
     $workItems = Import-Csv -Path $workItemsPath
@@ -117,7 +117,7 @@ function getWorkItems($id){
      
      return ,$c | ConvertTo-Json
 }
-function postWorkItems($workItemInput)
+function postWorkItemsapi($workItemInput)
 {
     $workItemsPath = [io.path]::combine($global:mainFolder,'Data\Team\'+$workItemInput.projectName.Trim()+'-WorkItems.csv');
     $workItems = Import-Csv -Path $workItemsPath
@@ -135,7 +135,7 @@ function postWorkItems($workItemInput)
     $workItems | Export-Csv $workItemsPath -NoTypeInformation
     return $obj | ConvertTo-Json
 }
-function putWorkItems($workItemInput)
+function putWorkItemsapi($workItemInput)
 {
     $workItemsPath = [io.path]::combine($global:mainFolder,'Data\Team\'+$workItemInput.projectName.Trim()+'-WorkItems.csv');
     $workItems = Import-Csv -Path $workItemsPath
@@ -147,7 +147,7 @@ function putWorkItems($workItemInput)
     $workItems | Export-Csv $workItemsPath -NoTypeInformation
     return $workItemInput.workItem | ConvertTo-Json
 }
-function postParty($party)
+function postPartyapi($party)
 {
     $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
     $parties = Import-Csv -Path $userDetailsPath
@@ -166,7 +166,7 @@ function postParty($party)
     $parties | Export-Csv $userDetailsPath -NoTypeInformation
     return $newParty| ConvertTo-Json
 }
-function putParty($party)
+function putPartyapi($party)
 {
     $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
     $parties = Import-Csv -Path $userDetailsPath
@@ -186,7 +186,7 @@ function putParty($party)
 }
 
 
-function getAllScores(){
+function getAllScoresapi(){
     $scoreCardPath = [io.path]::combine($global:projectFolder,'DataFolder\scoreCards.csv');
   #  $scoreCards = Import-Csv -Path $scoreCardPath | Where-Object {$_.ScoreType -eq 'Feasibility'} | ConvertTo-Json
   #  return $scoreCards
@@ -228,7 +228,7 @@ function getAllScores(){
 
 }
 
-function postCloseSession(){
+function postCloseSessionapi(){
   exit;
 }
 
