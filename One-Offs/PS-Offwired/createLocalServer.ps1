@@ -16,8 +16,8 @@
  #*=============================================================================
 "Control reached powershell - setting up a local server/listener"
 #----------------------------------------------------------------
-$global:projectFolder = 'C:\Users\arun-\Documents\GitHub\green-server\One-Offs\PS-Offwired\Offwired'
-#$global:projectFolder = $args[0]
+#$global:projectFolder = 'C:\Users\arun-\Documents\GitHub\green-server\One-Offs\PS-Offwired\Offwired'
+$global:projectFolder = $args[0]
 $global:mainFolder = split-path -parent $MyInvocation.MyCommand.Definition
 'args - 0 is ' + $args[0]
 #----------------------------------------------------------------
@@ -59,7 +59,7 @@ $MenuItem.Text = "Exit"
 $MenuItem.add_Click({
    $NotifyIcon.Visible = $False
    $form1.close()
-   Invoke-WebRequest -Uri http://localhost:8082/CloseSession -Method POST
+   Invoke-WebRequest -Uri http://localhost:8082/CloseSessionAPI -Method POST
    #exit;
 })
 $MenuItem2.Text = "Open"
@@ -192,6 +192,10 @@ function openListener($something){
                     try{
                         $page = Invoke-Expression $exp
                         $response.Headers.Add("Content-Type","application/json")
+                        # Below code is to handle aggressive caching seen first in IE 11 browser.
+                        $response.Headers.Add("Cache-Control","no-cache, no-store, must-revalidate, post-check=0, pre-check=0") #  HTTP 1.1.
+                        $response.Headers.Add("Pragma","no-cache") # HTTP 1.0.
+                        $response.Headers.Add("Expires",-1) # Proxies.
                     }catch{
                         Write-Host $_.Exception.Message
                         $pagePath = [io.path]::combine($global:projectFolder,'index.html') 
