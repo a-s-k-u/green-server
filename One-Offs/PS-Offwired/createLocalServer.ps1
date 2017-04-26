@@ -69,7 +69,13 @@ $MenuItem2.add_Click({
 $NotifyIcon.contextMenu.MenuItems.AddRange($MenuItem);
 $NotifyIcon.contextMenu.MenuItems.AddRange($MenuItem2);
 
+$NotifyIcon.BalloonTipIcon = "Info" 
+$NotifyIcon.BalloonTipText = "Allianz Team Portal is started on this machine. Use the funky Intranet icon in Notification Area to close the portal.Have a good day!" 
+$NotifyIcon.BalloonTipTitle = "Allianz Team Portal" 
+
+
 $NotifyIcon.Visible = $True
+$NotifyIcon.ShowBalloonTip(10000)
 [void][System.Windows.Forms.Application]::Run($form1)
   }
 #----------------------------------------------------------------
