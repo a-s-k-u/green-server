@@ -1,10 +1,52 @@
 ﻿function getPartySummaryapi(){
 
     $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
-    $parties = Import-Csv -Path $userDetailsPath | group Team
+    #$parties = Import-Csv -Path $userDetailsPath | group Team
+    $allparties = Import-Csv -Path $userDetailsPath 
+
 
     $collectionWithItems = New-Object System.Collections.Generic.List[System.Object]
-
+    $partySummary01 = New-Object System.Collections.Generic.List[System.Object]
+    $partySummary02 = New-Object System.Collections.Generic.List[System.Object]
+    $partySummary03 = New-Object System.Collections.Generic.List[System.Object]
+    $partySummary04 = New-Object System.Collections.Generic.List[System.Object]
+    Import-Csv -Path $userDetailsPath | Where-Object {($_.Group -eq 'Group01') -and ($_.Placement -eq 'Offshore') } | group Team | foreach-object {
+        $obj = New-Object psobject -Property @{
+                TeamName = $_.Values[0]
+                Count    = $_.Count
+                }
+        $partySummary01.Add($obj);
+    }
+    Import-Csv -Path $userDetailsPath | Where-Object {($_.Group -eq 'Group02')  -and ($_.Placement -eq 'Offshore') } | group Team | foreach-object {
+        $obj = New-Object psobject -Property @{
+                TeamName = $_.Values[0]
+                Count    = $_.Count
+                }
+        $partySummary02.Add($obj);
+    }
+    Import-Csv -Path $userDetailsPath | Where-Object {($_.Group -eq 'Group03')  -and ($_.Placement -eq 'Offshore') } | group Team | foreach-object {
+        $obj = New-Object psobject -Property @{
+                TeamName = $_.Values[0]
+                Count    = $_.Count
+                }
+        $partySummary03.Add($obj);
+    }
+    Import-Csv -Path $userDetailsPath | Where-Object {($_.Group -eq 'Group04')  -and ($_.Placement -eq 'Offshore') } | group Team | foreach-object {
+        $obj = New-Object psobject -Property @{
+                TeamName = $_.Values[0]
+                Count    = $_.Count
+                }
+        $partySummary04.Add($obj);
+    }
+    $tagArray = New-Object System.Collections.Generic.List[System.Object]
+   
+    $allparties | foreach-object {
+       if($_.Tags -ne ''){
+       $tagNameList = $_.Tags.split(",")
+       setTags ([ref]$tagNameList) 0 ([ref]$tagArray)
+       }
+    }
+    <#
     $parties | foreach-object {
 
         $obj = New-Object psobject -Property @{
@@ -12,22 +54,61 @@
                 Count    = $_.Count
                 }
         $collectionWithItems.Add($obj);
-    }
+    }#>
+
+
 
     $c = New-Object psobject -Property @{
-        data = $collectionWithItems
+        #data = $collectionWithItems
+        group01 = $partySummary01
+        group02 = $partySummary02
+        group03 = $partySummary03
+        group04 = $partySummary04
+        partytags    = $tagArray
         }
      
      return ,$c | ConvertTo-Json
 }
 
-function getPartiesapi($team){
+function getPartiesapi($inputText){
         $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
         #$teamName = '' + [string]$team
         #$teamName
-        $teamName = $team.Trim();
+        $teamName = $inputText.Split(' ')[1].Trim();
+        $placementName = $inputText.Split(' ')[2].Trim();
         #$teamName
-        $parties = Import-Csv -Path $userDetailsPath | Where-Object {$_.Team -eq $teamName}
+        $parties = Import-Csv -Path $userDetailsPath | Where-Object {($_.Team -eq $teamName) -and ($_.Placement -eq $placementName)}
+
+        #$collectionWithItems = @(2)
+        $collectionWithItems = New-Object System.Collections.Generic.List[System.Object]
+
+
+        $parties | foreach-object {
+           $obj = New-Object psobject -Property @{
+                    Id	      = $_.Id
+                    Name      = $_.Name
+               	    Team      = $_.Team
+               	    Location  = $_.Location
+               	    Role      = $_.Role
+                    DeskPhone = $_.Deskphone
+                    MobPhone  = $_.MobPhone	
+                    Email     = $_.Email
+                    Gender    = $_.Gender
+                    Avatar    = $_.Avatar
+                    Group     = $_.Group
+                    }
+           $collectionWithItems.Add($obj);
+        }
+
+        return ,$collectionWithItems | ConvertTo-Json
+ }
+ function getPartiesTagapi($tag){
+        $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
+        #$teamName = '' + [string]$team
+        #$teamName
+        $tagName = [System.Web.HttpUtility]::UrlDecode($tag.Trim());
+        #$teamName
+        $parties = Import-Csv -Path $userDetailsPath | Where-Object {$_.Tags -match $tagName}
 
         #$collectionWithItems = @(2)
         $collectionWithItems = New-Object System.Collections.Generic.List[System.Object]
@@ -53,7 +134,7 @@ function getPartiesapi($team){
  }
  function getPartyapi($id){
         $id = $id.trim()
-        if($id -match 'i0' ) {
+        if($id -eq 'i0' ) {
         $id = [Environment]::UserName
         }
         $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
@@ -160,6 +241,8 @@ function postPartyapi($party)
                 MobPhone    = $party.MobPhone
                 Location    = $party.Location
                 Avatar      = $party.Avatar
+                Group       = $party.Group
+                Placement   = $party.Placement
                 ShortDescription = $party.ShortDescription
                 }
     $parties += $newParty
@@ -179,6 +262,7 @@ function putPartyapi($party)
        $_.Location = $party.Location
        $_.Avatar = $party.Avatar
        $_.ShortDescription = $party.ShortDescription
+       $_.Tags = $party.Tags
     }
     }     
     $parties | Export-Csv $userDetailsPath -NoTypeInformation
@@ -297,3 +381,27 @@ function setProjectDetails($teamFolder){
   }#File loop
 
  }
+
+
+ function setTags ([ref]$tagNameList, $count, [ref]$tagArray){ #recursive function to get field counts.
+   $tagName = ($tagNameList.Value)[$count]
+   $isTagPresent = $false;
+   ($tagArray.Value) | foreach-object {
+       if ($_.TeamName -eq $tagName){
+          $_.Count += 1;
+          $isTagPresent = $true;
+       }
+   }
+   if ($isTagPresent -eq $false){
+      $obj = New-Object psobject -Property @{
+                TeamName = $tagName
+                Count    = 1
+                }
+        ($tagArray.Value).Add($obj);
+   }
+   $count++;
+   if ($count -lt ($tagNameList.Value).Count){
+      setTags (([ref]$tagNameList).Value) $count (([ref]$tagArray).Value)
+   }
+}
+
