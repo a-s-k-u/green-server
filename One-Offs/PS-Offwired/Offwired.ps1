@@ -74,7 +74,7 @@ function getPartiesapi($inputText){
         $userDetailsPath = [io.path]::combine($global:mainFolder,'Data\Party\UserIDList.csv');
         #$teamName = '' + [string]$team
         #$teamName
-        $teamName = $inputText.Split(' ')[1].Trim();
+        $teamName = [System.Web.HttpUtility]::UrlDecode($inputText.Split(' ')[1].Trim());
         $placementName = $inputText.Split(' ')[2].Trim();
         #$teamName
         $parties = Import-Csv -Path $userDetailsPath | Where-Object {($_.Team -eq $teamName) -and ($_.Placement -eq $placementName)}
@@ -237,6 +237,7 @@ function postPartyapi($party)
                 Team        = $party.Team
                 Name        = $party.Name
                	Email       = $party.Email
+                Role        = $party.Role
                 DeskPhone   = $party.DeskPhone
                 MobPhone    = $party.MobPhone
                 Location    = $party.Location
@@ -256,6 +257,7 @@ function putPartyapi($party)
     $parties | ForEach {
     if ($_.Id -match $party.Id){
        $_.Name = $party.Name
+       $_.Role = $party.Role
        $_.Email = $party.Email
        $_.DeskPhone = $party.DeskPhone
        $_.MobPhone = $party.MobPhone
@@ -374,7 +376,7 @@ function setProjectDetails($teamFolder){
      if($totalPoints -eq 0){
      $projectSummary.StoryPoints = 0
      }else{
-     $projectSummary.StoryPoints = ($totalCompleted / $totalPoints)*100
+     $projectSummary.StoryPoints = [math]::Round(($totalCompleted / $totalPoints)*100)
      }
      $workItemsNew | Export-Csv $filePath -NoTypeInformation
 
@@ -385,6 +387,7 @@ function setProjectDetails($teamFolder){
 
  function setTags ([ref]$tagNameList, $count, [ref]$tagArray){ #recursive function to get field counts.
    $tagName = ($tagNameList.Value)[$count]
+   $tagName = $tagName.Trim();
    $isTagPresent = $false;
    ($tagArray.Value) | foreach-object {
        if ($_.TeamName -eq $tagName){
@@ -403,5 +406,15 @@ function setProjectDetails($teamFolder){
    if ($count -lt ($tagNameList.Value).Count){
       setTags (([ref]$tagNameList).Value) $count (([ref]$tagArray).Value)
    }
+}
+
+function intitalizeUserDetails($userID,$partyFolder,$samplefile){
+        $userID = [Environment]::UserName
+        $partyFile = [io.path]::combine($partyFolder,'\' + $userID + '.csv');
+        $isValid = Test-Path $partyFile 
+        if ($isValid -eq 0)
+        {
+        Copy-Item -Path $samplefile -Destination $partyFile
+        } 
 }
 
